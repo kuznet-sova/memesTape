@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8C0C6F4427E507090042AA4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C6F4327E507090042AA4A /* AppDelegate.swift */; };
-		8C0C6F4627E507090042AA4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C6F4527E507090042AA4A /* SceneDelegate.swift */; };
 		8C0C6F4827E507090042AA4A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C6F4727E507090042AA4A /* ViewController.swift */; };
-		8C0C6F4B27E507090042AA4A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0C6F4927E507090042AA4A /* Main.storyboard */; };
 		8C0C6F4D27E5070A0042AA4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C0C6F4C27E5070A0042AA4A /* Assets.xcassets */; };
 		8C0C6F5027E5070A0042AA4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0C6F4E27E5070A0042AA4A /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -18,9 +16,7 @@
 /* Begin PBXFileReference section */
 		8C0C6F4027E507090042AA4A /* memesTape.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = memesTape.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C0C6F4327E507090042AA4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8C0C6F4527E507090042AA4A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8C0C6F4727E507090042AA4A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		8C0C6F4A27E507090042AA4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8C0C6F4C27E5070A0042AA4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C0C6F4F27E5070A0042AA4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8C0C6F5127E5070A0042AA4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -57,9 +53,7 @@
 			isa = PBXGroup;
 			children = (
 				8C0C6F4327E507090042AA4A /* AppDelegate.swift */,
-				8C0C6F4527E507090042AA4A /* SceneDelegate.swift */,
 				8C0C6F4727E507090042AA4A /* ViewController.swift */,
-				8C0C6F4927E507090042AA4A /* Main.storyboard */,
 				8C0C6F4C27E5070A0042AA4A /* Assets.xcassets */,
 				8C0C6F4E27E5070A0042AA4A /* LaunchScreen.storyboard */,
 				8C0C6F5127E5070A0042AA4A /* Info.plist */,
@@ -127,7 +121,6 @@
 			files = (
 				8C0C6F5027E5070A0042AA4A /* LaunchScreen.storyboard in Resources */,
 				8C0C6F4D27E5070A0042AA4A /* Assets.xcassets in Resources */,
-				8C0C6F4B27E507090042AA4A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,21 +133,12 @@
 			files = (
 				8C0C6F4827E507090042AA4A /* ViewController.swift in Sources */,
 				8C0C6F4427E507090042AA4A /* AppDelegate.swift in Sources */,
-				8C0C6F4627E507090042AA4A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		8C0C6F4927E507090042AA4A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8C0C6F4A27E507090042AA4A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8C0C6F4E27E5070A0042AA4A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -293,15 +277,15 @@
 				INFOPLIST_FILE = memesTape/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.first.memesTape;
+				PRODUCT_BUNDLE_IDENTIFIER = kuznet.i.sova.memesTape;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -320,15 +304,15 @@
 				INFOPLIST_FILE = memesTape/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.first.memesTape;
+				PRODUCT_BUNDLE_IDENTIFIER = kuznet.i.sova.memesTape;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
