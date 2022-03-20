@@ -15,19 +15,27 @@ class TapeTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = .green
         navigationItem.title = "Memes tape"
         navigationController?.navigationBar.prefersLargeTitles = true
         tableView.register(TapeViewCell.self, forCellReuseIdentifier: "memeCell")
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return memeImages.count
+        switch tableView {
+           case self.tableView:
+              return memeImages.count
+            default:
+              return 0
+           }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "memeCell", for: indexPath)
-
+        let cell = TapeViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "memeCell")
+        
+        cell.imageView?.image = UIImage(named: memeImages[indexPath.row])
+        cell.textLabel?.text = memeAuthors[indexPath.row]
+        cell.detailTextLabel?.text = memeDescriptions[indexPath.row]
+        
         return cell
     }
     

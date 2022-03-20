@@ -7,9 +7,9 @@
 
 struct MemeImages {
     let memeImages = [
-        "i1",
-        "i2",
-        "i3"
+        "i1.jpg",
+        "i2.jpg",
+        "i3.jpg"
     ]
 }
 
