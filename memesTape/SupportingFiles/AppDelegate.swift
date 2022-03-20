@@ -19,9 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setupWindow() {
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = ViewController()
+        window?.rootViewController = UINavigationController.init(rootViewController: TapeTableViewController())
         window?.makeKeyAndVisible()
     }
 
 }
-
