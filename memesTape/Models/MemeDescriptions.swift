@@ -9,17 +9,14 @@ struct MemeDescriptions {
     let memeDescriptions = [
         "111",
         "222",
-        "333"
+        "333",
+        "444",
+        "555",
+        "666",
+        "777",
+        "888",
+        "999",
+        "101010",
+        "111111"
     ]
-}
-
-extension MemeDescriptions {
-    static func getMemeDescription() -> [String] {
-        var memeDescriptionsList = [String]()
-
-        for index in 0 ..< MemeDescriptions().memeDescriptions.count {
-            memeDescriptionsList.append(MemeDescriptions().memeDescriptions[index])
-        }
-        return memeDescriptionsList
-    }
 }

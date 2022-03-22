@@ -9,17 +9,14 @@ struct MemeImages {
     let memeImages = [
         "i1.jpg",
         "i2.jpg",
-        "i3.jpg"
+        "i3.jpg",
+        "i4.jpg",
+        "i5.jpg",
+        "i6.jpg",
+        "i7.jpg",
+        "i8.jpg",
+        "i9.jpg",
+        "i10.jpg",
+        "i11.jpg"
     ]
-}
-
-extension MemeImages {
-    static func getMemeImage() -> [String] {
-        var memeImagesList = [String]()
-
-        for index in 0 ..< MemeImages().memeImages.count {
-            memeImagesList.append(MemeImages().memeImages[index])
-        }
-        return memeImagesList
-    }
 }

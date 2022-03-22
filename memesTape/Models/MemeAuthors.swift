@@ -9,17 +9,14 @@ struct MemeAuthors {
     let memeAuthors = [
         "1",
         "2",
-        "3"
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11"
     ]
-}
-
-extension MemeAuthors {
-    static func getMemeAuthor() -> [String] {
-        var memeAuthorsList = [String]()
-
-        for index in 0 ..< MemeAuthors().memeAuthors.count {
-            memeAuthorsList.append(MemeAuthors().memeAuthors[index])
-        }
-        return memeAuthorsList
-    }
 }
