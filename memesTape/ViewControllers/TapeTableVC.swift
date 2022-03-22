@@ -18,11 +18,11 @@ class TapeTableVC: UITableViewController {
     }
     
     private func setupTableView() {
+        let nib = UINib(nibName: TapeViewCell.reuseIdentifier, bundle: nil)
+        
+        tableView.register(nib, forCellReuseIdentifier: TapeViewCell.reuseIdentifier)
         tableView.allowsSelection = false
         tableView.separatorColor = .clear
-        
-        let nib = UINib(nibName: TapeViewCell.reuseIdentifier, bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: TapeViewCell.reuseIdentifier)
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
