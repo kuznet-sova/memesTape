@@ -31,11 +31,8 @@ class TapeTableVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TapeViewCell.reuseIdentifier, for: indexPath) as! TapeViewCell
-        let fullPost = fullPost[indexPath.row]
 
-        cell.memeImageViev?.image = UIImage(named: fullPost.memeImageName)
-        cell.memeAuthorLabel?.text = fullPost.memeAuthor
-        cell.memeDescriptionLebel?.text = fullPost.memeDescription
+        cell.configure(fullPost: fullPost[indexPath.row])
 
         return cell
     }
