@@ -16,17 +16,57 @@ class TapeViewCell: UITableViewCell {
     @IBOutlet var memeDescriptionLebel: UILabel!
     
     var likesCount = (1...100).randomElement()!
+    var isChosen = false
     static let reuseIdentifier = String(describing: TapeViewCell.self)
     
     func configure(fullPost: FullPost) {
         memeImageViev.image = UIImage(named: fullPost.memeImageName)
         memeAuthorLabel.text = fullPost.memeAuthor
         memeDescriptionLebel.text = fullPost.memeDescription
-        likesCounterLebel.text = "\(likesCount)"
+        likesCounterLebel.text = getLikesCount()
         likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         selectionStyle = .none
     }
     
-    @IBAction func likeButtonTap(_ sender: Any) {}
+    private func declensionLikes(likeCount: Int) -> String {
+        var declensionLike: String
+//        Как доделаю основное надо не забыть вынести в отдельную функцию высчитывание значений для 2 и 3 кейса, чтобы не перечислять вручную
+        switch likeCount {
+        case 0:
+            declensionLike = ""
+        case 1, 21, 31, 41, 51, 61, 71, 81, 91:
+            declensionLike = "лайк"
+        case 2, 3, 4, 22, 23, 24, 32, 33, 34, 42, 43, 44, 52, 53, 54, 62, 63, 64, 72, 73, 74, 82, 83, 84, 92, 93, 94:
+            declensionLike = "лайка"
+        default:
+            declensionLike = "лайков"
+        }
+        
+        return declensionLike
+    }
+    
+    private func getLikesCount() -> String {
+        let likesCountInfo = "\(likesCount) " + declensionLikes(likeCount: likesCount)
+        
+        return likesCountInfo
+    }
+    
+    private func getFullLikesInfo() {
+        if isChosen == false {
+            likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            likesCount += 1
+            likesCounterLebel.text = getLikesCount()
+            isChosen = true
+        } else {
+            likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            likesCount -= 1
+            likesCounterLebel.text = getLikesCount()
+            isChosen = false
+        }
+    }
+    
+    @IBAction func likeButtonTap(_ sender: Bool) {
+        getFullLikesInfo()
+    }
     
 }
