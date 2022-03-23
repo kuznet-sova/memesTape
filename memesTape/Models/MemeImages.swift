@@ -16,6 +16,11 @@ struct MemeImages {
         "i7.jpg",
         "i8.jpg",
         "i9.jpg",
-        "i10.jpg"
+        "i10.jpg",
+        "i11.jpg",
+        "i12.jpg",
+        "i13.jpg",
+        "i14.jpg",
+        "i15.jpg"
     ]
 }

@@ -15,9 +15,9 @@ class TapeViewCell: UITableViewCell {
     @IBOutlet var memeAuthorLabel: UILabel!
     @IBOutlet var memeDescriptionLebel: UILabel!
     
+    static let reuseIdentifier = String(describing: TapeViewCell.self)
     var likesCount = (1...100).randomElement()!
     var isChosen = false
-    static let reuseIdentifier = String(describing: TapeViewCell.self)
     
     func configure(fullPost: FullPost) {
         memeImageViev.image = UIImage(named: fullPost.memeImageName)
@@ -52,16 +52,16 @@ class TapeViewCell: UITableViewCell {
     }
     
     private func getFullLikesInfo() {
-        if isChosen == false {
-            likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            likesCount += 1
-            likesCounterLebel.text = getLikesCount()
-            isChosen = true
-        } else {
+        if isChosen == true {
             likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
             likesCount -= 1
             likesCounterLebel.text = getLikesCount()
             isChosen = false
+        } else {
+            likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            likesCount += 1
+            likesCounterLebel.text = getLikesCount()
+            isChosen = true
         }
     }
     

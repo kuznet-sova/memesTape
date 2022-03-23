@@ -22,7 +22,6 @@ class TapeTableVC: UITableViewController {
         
         tableView.register(nib, forCellReuseIdentifier: TapeViewCell.reuseIdentifier)
         tableView.allowsSelection = false
-        tableView.separatorColor = .clear
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
