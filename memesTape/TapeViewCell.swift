@@ -19,6 +19,14 @@ class TapeViewCell: UITableViewCell {
     var likesCount = (1...100).randomElement()!
     var isChosen = false
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapFunc))
+        doubleTap.numberOfTapsRequired = 2
+        self.addGestureRecognizer(doubleTap)
+    }
+    
     func configure(fullPost: FullPost) {
         memeImageViev.image = UIImage(named: fullPost.memeImageName)
         memeAuthorLabel.text = fullPost.memeAuthor
@@ -63,6 +71,10 @@ class TapeViewCell: UITableViewCell {
             likesCounterLebel.text = getLikesCount()
             isChosen = true
         }
+    }
+    
+    @objc func doubleTapFunc() {
+        getFullLikesInfo()
     }
     
     @IBAction func likeButtonTap(_ sender: Bool) {
