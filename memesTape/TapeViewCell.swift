@@ -21,7 +21,7 @@ class TapeViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-    
+//        Сделать даблтап только по картинке, а не по всей ячейке пока не получилось
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapFunc))
         doubleTap.numberOfTapsRequired = 2
         self.addGestureRecognizer(doubleTap)
