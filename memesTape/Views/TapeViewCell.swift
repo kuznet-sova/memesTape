@@ -61,18 +61,18 @@ class TapeViewCell: UITableViewCell {
     }
     
     private func getFullLikesInfo() {
-        guard var likes = likesCount else { return }
-        
-        if isChosen == true {
-            likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-            likes -= 1
-            getLikesCount()
-            isChosen = false
-        } else {
-            likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            likes += 1
-            getLikesCount()
-            isChosen = true
+        if likesCount != nil {
+            if isChosen == true {
+                likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+                likesCount! -= 1
+                getLikesCount()
+                isChosen = false
+            } else {
+                likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                likesCount! += 1
+                getLikesCount()
+                isChosen = true
+            }
         }
     }
     
