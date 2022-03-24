@@ -31,7 +31,7 @@
 		8CDA4C3727E746E0009489D0 /* MemeImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeImages.swift; sourceTree = "<group>"; };
 		8CDA4C3927E74722009489D0 /* MemeAuthors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeAuthors.swift; sourceTree = "<group>"; };
 		8CDA4C3B27E74753009489D0 /* MemeDescriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeDescriptions.swift; sourceTree = "<group>"; };
-		8CDA4C3D27E7495C009489D0 /* TapeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TapeViewCell.swift; path = memesTape/Storyboards/TapeViewCell.swift; sourceTree = SOURCE_ROOT; };
+		8CDA4C3D27E7495C009489D0 /* TapeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeViewCell.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +49,9 @@
 			isa = PBXGroup;
 			children = (
 				8C0C6F4227E507090042AA4A /* memesTape */,
+				8CDA4C3D27E7495C009489D0 /* TapeViewCell.swift */,
+				8C33156A27EA66D000D8E000 /* TapeViewCell.xib */,
+				8C0C6F5127E5070A0042AA4A /* Info.plist */,
 				8C0C6F4127E507090042AA4A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,23 +68,12 @@
 			isa = PBXGroup;
 			children = (
 				8CDA4C3027E7458E009489D0 /* ViewControllers */,
-				8C33156E27ED181F00D8E000 /* Views */,
 				8CDA4C3127E745A8009489D0 /* Models */,
 				8CDA4C3327E745D5009489D0 /* SupportingFiles */,
 				8CDA4C3227E745C0009489D0 /* Sourse */,
 				8CDA4C3427E745EB009489D0 /* Storyboards */,
 			);
 			path = memesTape;
-			sourceTree = "<group>";
-		};
-		8C33156E27ED181F00D8E000 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				8CDA4C3D27E7495C009489D0 /* TapeViewCell.swift */,
-				8C33156A27EA66D000D8E000 /* TapeViewCell.xib */,
-			);
-			name = Views;
-			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		8CDA4C3027E7458E009489D0 /* ViewControllers */ = {
@@ -114,7 +106,6 @@
 		8CDA4C3327E745D5009489D0 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				8C0C6F5127E5070A0042AA4A /* Info.plist */,
 				8C0C6F4327E507090042AA4A /* AppDelegate.swift */,
 			);
 			path = SupportingFiles;
