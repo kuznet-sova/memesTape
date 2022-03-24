@@ -31,7 +31,7 @@
 		8CDA4C3727E746E0009489D0 /* MemeImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeImages.swift; sourceTree = "<group>"; };
 		8CDA4C3927E74722009489D0 /* MemeAuthors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeAuthors.swift; sourceTree = "<group>"; };
 		8CDA4C3B27E74753009489D0 /* MemeDescriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeDescriptions.swift; sourceTree = "<group>"; };
-		8CDA4C3D27E7495C009489D0 /* TapeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TapeViewCell.swift; path = memesTape/TapeViewCell.swift; sourceTree = SOURCE_ROOT; };
+		8CDA4C3D27E7495C009489D0 /* TapeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TapeViewCell.swift; path = memesTape/Views/TapeViewCell.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,14 +65,22 @@
 			isa = PBXGroup;
 			children = (
 				8CDA4C3027E7458E009489D0 /* ViewControllers */,
+				8C33157327ED1BB700D8E000 /* Views */,
 				8CDA4C3127E745A8009489D0 /* Models */,
 				8CDA4C3327E745D5009489D0 /* SupportingFiles */,
 				8CDA4C3227E745C0009489D0 /* Sourse */,
 				8CDA4C3427E745EB009489D0 /* Storyboards */,
+			);
+			path = memesTape;
+			sourceTree = "<group>";
+		};
+		8C33157327ED1BB700D8E000 /* Views */ = {
+			isa = PBXGroup;
+			children = (
 				8CDA4C3D27E7495C009489D0 /* TapeViewCell.swift */,
 				8C33156A27EA66D000D8E000 /* TapeViewCell.xib */,
 			);
-			path = memesTape;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		8CDA4C3027E7458E009489D0 /* ViewControllers */ = {
