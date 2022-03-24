@@ -8,7 +8,7 @@
 import UIKit
 
 class TapeTableVC: UITableViewController {
-    var fullPost = FullPost.getFullPostInfo()
+    private var fullPost = FullPost.getFullPostInfo()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +37,13 @@ class TapeTableVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if tableView.frame.width < tableView.frame.height {
-            return tableView.frame.width
-        } else {
-            return tableView.frame.height
+        let tableViewSides = [tableView.frame.width, tableView.frame.height]
+
+        guard let minSide = tableViewSides.min() else {
+            return tableView.frame.width/2
         }
+        
+        return minSide
     }
     
 }

@@ -16,8 +16,8 @@ class TapeViewCell: UITableViewCell {
     @IBOutlet var memeDescriptionLebel: UILabel!
     
     static let reuseIdentifier = String(describing: TapeViewCell.self)
-    var likesCount = (1...100).randomElement()!
-    var isChosen = false
+    private var likesCount = (1...100).randomElement()
+    private var isChosen = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,7 +31,7 @@ class TapeViewCell: UITableViewCell {
         memeImageViev.image = UIImage(named: fullPost.memeImageName)
         memeAuthorLabel.text = fullPost.memeAuthor
         memeDescriptionLebel.text = fullPost.memeDescription
-        likesCounterLebel.text = getLikesCount()
+        getLikesCount()
         likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         selectionStyle = .none
     }
@@ -53,22 +53,25 @@ class TapeViewCell: UITableViewCell {
         return declensionLike
     }
     
-    private func getLikesCount() -> String {
-        let likesCountInfo = "\(likesCount) " + declensionLikes(likeCount: likesCount)
+    private func getLikesCount() {
+        guard let likes = likesCount else { return }
         
-        return likesCountInfo
+        let likesCountInfo = "\(likes) " + declensionLikes(likeCount: likes)
+        likesCounterLebel.text = likesCountInfo
     }
     
     private func getFullLikesInfo() {
+        guard var likes = likesCount else { return }
+        
         if isChosen == true {
             likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-            likesCount -= 1
-            likesCounterLebel.text = getLikesCount()
+            likes -= 1
+            getLikesCount()
             isChosen = false
         } else {
             likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            likesCount += 1
-            likesCounterLebel.text = getLikesCount()
+            likes += 1
+            getLikesCount()
             isChosen = true
         }
     }
@@ -77,7 +80,7 @@ class TapeViewCell: UITableViewCell {
         getFullLikesInfo()
     }
     
-    @IBAction func likeButtonTap(_ sender: Bool) {
+    @IBAction private func likeButtonTap(_ sender: Bool) {
         getFullLikesInfo()
     }
     
