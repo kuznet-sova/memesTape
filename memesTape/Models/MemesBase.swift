@@ -5,22 +5,12 @@
 //  Created by Ирина Кузнецова on 26.03.2022.
 //
 
-struct MemesBase: Codable {
-    let success: Bool
-    let data: Memes
-}
-
-struct Memes: Codable {
-    let memes: [Meme]
-}
-
-struct Meme: Codable {
-    let id, name: String
+struct MemesBase: Decodable {
     let url: String
-    let width, height, boxCount: Int
+    let template: String
+}
 
-    enum CodingKeys: String, CodingKey {
-        case id, name, url, width, height
-        case boxCount = "box_count"
-    }
+struct Template: Decodable {
+    let id: String
+    let name: String
 }

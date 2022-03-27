@@ -8,18 +8,17 @@
 import UIKit
 
 class TapeTableVC: UITableViewController {
-    private var fullPost = FullPost.getFullPostInfo()
-    private var memes: [Meme] = []
+    private var memes: [MemesBase] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Meme patterns"
+        navigationItem.title = "Memes tape"
         navigationController?.navigationBar.prefersLargeTitles = true
         setupTableView()
         
         NetworkManager.shared.fetchData() { memesBase in
             DispatchQueue.main.async {
-                self.memes = memesBase.data.memes
+                self.memes = memesBase
                 self.tableView.reloadData()
             }
         }

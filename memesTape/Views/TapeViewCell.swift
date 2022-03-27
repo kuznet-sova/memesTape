@@ -27,15 +27,20 @@ class TapeViewCell: UITableViewCell {
         self.addGestureRecognizer(doubleTap)
     }
     
-    func configure(memeInfo: Meme) {
+    func configure(memeInfo: MemesBase) {
         NetworkManager.shared.getMemeImage(with: memeInfo.url) { memeImage in
             DispatchQueue.main.async {
                 self.memeImageViev.image = memeImage
+                
             }
         }
-//        memeAuthorLabel.text = fullPost.memeAuthor
-        memeAuthorLabel.text = memeInfo.id
-        memeDescriptionLebel.text = memeInfo.name
+        NetworkManager.shared.fetchTemplateData(url: memeInfo.template) { templateInfo in
+            DispatchQueue.main.async {
+                self.memeAuthorLabel.text = templateInfo.id
+                self.memeDescriptionLebel.text = templateInfo.name
+            }
+        }
+        
         likesCounterLebel.text = likesCountUniversal(count: randomInt)
         likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         selectionStyle = .none
