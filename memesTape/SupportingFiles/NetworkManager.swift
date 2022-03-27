@@ -28,4 +28,15 @@ class NetworkManager {
             
         }.resume()
     }
+    
+    func getMemeImage(with url: String?, with complition: @escaping (UIImage) -> Void) {
+        guard let memeImageUrl = url else { return }
+        
+        guard let stringMemeImageUrl = URL(string: memeImageUrl),
+            let memeImageData = try? Data(contentsOf: stringMemeImageUrl),
+            let memeImage = UIImage(data: memeImageData) else { return }
+        
+        complition(memeImage)
+    }
+
 }
