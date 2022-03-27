@@ -13,7 +13,7 @@ class TapeTableVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Memes tape"
+        navigationItem.title = "Meme patterns"
         navigationController?.navigationBar.prefersLargeTitles = true
         setupTableView()
         
