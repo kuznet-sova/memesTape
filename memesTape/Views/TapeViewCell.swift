@@ -18,6 +18,7 @@ class TapeViewCell: UITableViewCell {
     static let reuseIdentifier = String(describing: TapeViewCell.self)
     private var randomInt = Int.random(in: 1...100)
     private var isChosen = false
+    var memeInfo: Meme?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,7 +31,8 @@ class TapeViewCell: UITableViewCell {
     func configure(fullPost: FullPost) {
         memeImageViev.image = UIImage(named: fullPost.memeImageName)
         memeAuthorLabel.text = fullPost.memeAuthor
-        memeDescriptionLebel.text = fullPost.memeDescription
+//        memeDescriptionLebel.text = fullPost.memeDescription
+        memeDescriptionLebel.text = memeInfo?.name
         likesCounterLebel.text = likesCountUniversal(count: randomInt)
         likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         selectionStyle = .none

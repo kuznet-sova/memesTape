@@ -9,12 +9,20 @@ import UIKit
 
 class TapeTableVC: UITableViewController {
     private var fullPost = FullPost.getFullPostInfo()
+    private var memes: [Meme] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Memes tape"
         navigationController?.navigationBar.prefersLargeTitles = true
         setupTableView()
+        
+        NetworkManager.shared.fetchData() { memesBase in
+            DispatchQueue.main.async {
+                self.memes = memesBase.data.memes
+                self.tableView.reloadData()
+            }
+        }
     }
     
     private func setupTableView() {
@@ -25,12 +33,13 @@ class TapeTableVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fullPost.count
+        return memes.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TapeViewCell.reuseIdentifier, for: indexPath) as! TapeViewCell
-
+        
+        cell.memeInfo = memes[indexPath.row]
         cell.configure(fullPost: fullPost[indexPath.row])
 
         return cell
