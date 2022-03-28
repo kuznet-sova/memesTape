@@ -10,8 +10,8 @@ import UIKit
 class NetworkManager {
     static let shared = NetworkManager()
     
-    func fetchData(with complition: @escaping ([MemesBase]) -> Void) {
-        let memesUrl = "https://api.memegen.link/images"
+    func fetchData(with complition: @escaping (MemesBase) -> Void) {
+        let memesUrl = "https://meme-api.herokuapp.com/gimme/5"
         
         guard let url = URL(string: memesUrl) else { return }
         
@@ -20,27 +20,8 @@ class NetworkManager {
             guard let data = data else { return }
             
             do {
-                let memesBase = try JSONDecoder().decode([MemesBase].self, from: data)
+                let memesBase = try JSONDecoder().decode(MemesBase.self, from: data)
                 complition(memesBase)
-            } catch let jsonError {
-                print(jsonError.localizedDescription)
-            }
-            
-        }.resume()
-    }
-    
-    func fetchTemplateData(url: String, with complition: @escaping (Template) -> Void) {
-        let templateURL = url
-        
-        guard let url = URL(string: templateURL) else { return }
-        
-        URLSession.shared.dataTask(with: url) { (data, _, error) in
-            if let error = error { print(error); return }
-            guard let data = data else { return }
-            
-            do {
-                let templateList = try JSONDecoder().decode(Template.self, from: data)
-                complition(templateList)
             } catch let jsonError {
                 print(jsonError.localizedDescription)
             }

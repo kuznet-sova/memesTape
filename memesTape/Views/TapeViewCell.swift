@@ -16,7 +16,7 @@ class TapeViewCell: UITableViewCell {
     @IBOutlet var memeDescriptionLebel: UILabel!
     
     static let reuseIdentifier = String(describing: TapeViewCell.self)
-    private var randomInt = Int.random(in: 1...100)
+    private var likesCount = 0
     private var isChosen = false
     
     override func awakeFromNib() {
@@ -27,21 +27,15 @@ class TapeViewCell: UITableViewCell {
         self.addGestureRecognizer(doubleTap)
     }
     
-    func configure(memeInfo: MemesBase) {
+    func configure(memeInfo: Meme) {
         NetworkManager.shared.getMemeImage(with: memeInfo.url) { memeImage in
-            DispatchQueue.main.async {
-                self.memeImageViev.image = memeImage
-                
-            }
-        }
-        NetworkManager.shared.fetchTemplateData(url: memeInfo.template) { templateInfo in
-            DispatchQueue.main.async {
-                self.memeAuthorLabel.text = templateInfo.id
-                self.memeDescriptionLebel.text = templateInfo.name
-            }
+            self.likesCount = memeInfo.ups
+            self.memeImageViev.image = memeImage
+            self.memeAuthorLabel.text = memeInfo.author
+            self.memeDescriptionLebel.text = memeInfo.title
         }
         
-        likesCounterLebel.text = likesCountUniversal(count: randomInt)
+        likesCounterLebel.text = likesCountUniversal(count: likesCount)
         likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         selectionStyle = .none
     }
@@ -57,13 +51,13 @@ class TapeViewCell: UITableViewCell {
     private func getFullLikesInfo() {
         if isChosen == true {
             likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-            randomInt -= 1
-            likesCounterLebel.text = likesCountUniversal(count: randomInt)
+            likesCount -= 1
+            likesCounterLebel.text = likesCountUniversal(count: likesCount)
             isChosen = false
         } else {
             likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            randomInt += 1
-            likesCounterLebel.text = likesCountUniversal(count: randomInt)
+            likesCount += 1
+            likesCounterLebel.text = likesCountUniversal(count: likesCount)
             isChosen = true
         }
     }

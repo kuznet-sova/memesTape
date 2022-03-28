@@ -8,7 +8,7 @@
 import UIKit
 
 class TapeTableVC: UITableViewController {
-    private var memes: [MemesBase] = []
+    private var memes: [Meme] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +18,7 @@ class TapeTableVC: UITableViewController {
         
         NetworkManager.shared.fetchData() { memesBase in
             DispatchQueue.main.async {
-                self.memes = memesBase
+                self.memes = memesBase.memes
                 self.tableView.reloadData()
             }
         }
@@ -51,6 +51,17 @@ class TapeTableVC: UITableViewController {
         }
         
         return minSide
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == memes.count-1 {
+            NetworkManager.shared.fetchData() { memesBase in
+                DispatchQueue.main.async {
+                    self.memes.append(contentsOf: memesBase.memes)
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
     
 }
