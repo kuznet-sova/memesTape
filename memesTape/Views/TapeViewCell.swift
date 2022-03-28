@@ -41,11 +41,11 @@ class TapeViewCell: UITableViewCell {
     }
     
     private func likesCountUniversal(count: Int) -> String {
-        let formatString : String = NSLocalizedString("likes count",
+        let formatString = NSLocalizedString("likes count",
                                                       comment: "likes count string format to be found in Localized.stringsdict")
-        let resultString : String = String.localizedStringWithFormat(formatString, count)
+        let resultString = String.localizedStringWithFormat(formatString, count)
     
-        return resultString;
+        return resultString
     }
     
     private func getFullLikesInfo() {
