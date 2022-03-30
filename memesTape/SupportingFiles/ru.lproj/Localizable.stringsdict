@@ -12,12 +12,12 @@
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
-			<key>one</key>
-			<string>%d лайк</string>
-			<key>few</key>
-			<string>%d лайка</string>
-			<key>many</key>
-			<string>%d лайков</string>
+            <key>one</key>
+            <string>%d лайк</string>
+            <key>few</key>
+            <string>%d лайка</string>
+            <key>many</key>
+            <string>%d лайков</string>
 		</dict>
 	</dict>
 </dict>
