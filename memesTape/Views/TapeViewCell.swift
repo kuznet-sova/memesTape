@@ -18,6 +18,7 @@ class TapeViewCell: UITableViewCell {
     static let reuseIdentifier = String(describing: TapeViewCell.self)
     private var likesCount = 0
     private var isChosen = false
+    private let animateImageView = UIImageView(image: UIImage(systemName: "heart.fill"))
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,6 +26,8 @@ class TapeViewCell: UITableViewCell {
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapFunc))
         doubleTap.numberOfTapsRequired = 2
         self.addGestureRecognizer(doubleTap)
+        
+        animateImageView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func configure(memeInfo: Meme) {
@@ -34,7 +37,6 @@ class TapeViewCell: UITableViewCell {
             self.memeAuthorLabel.text = memeInfo.author
             self.memeDescriptionLebel.text = memeInfo.title
         }
-        
         likesCounterLebel.text = likesCountUniversal(count: likesCount)
         likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         selectionStyle = .none
@@ -51,11 +53,15 @@ class TapeViewCell: UITableViewCell {
     private func getFullLikesInfo() {
         if isChosen == true {
             likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            animateImageView.removeFromSuperview()
             likesCount -= 1
             likesCounterLebel.text = likesCountUniversal(count: likesCount)
             isChosen = false
         } else {
             likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            memeImageViev.addSubview(animateImageView)
+            animateImageView.centerXAnchor.constraint(equalTo: memeImageViev.centerXAnchor).isActive = true
+            animateImageView.centerYAnchor.constraint(equalTo: memeImageViev.centerYAnchor).isActive = true
             likesCount += 1
             likesCounterLebel.text = likesCountUniversal(count: likesCount)
             isChosen = true
