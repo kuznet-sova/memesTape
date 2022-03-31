@@ -28,6 +28,7 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapFunc))
         doubleTap.numberOfTapsRequired = 2
         self.addGestureRecognizer(doubleTap)
+//        Тут еще осталось разобраться как поправить скачущие размеры imageView при масштабировании (схлопывается картинка при увеличении, скрываются лейблы с автором/описанием, картинка дергается при приближении)
         scrollViev.delegate = self
         scrollViev.minimumZoomScale = 1.0
         scrollViev.maximumZoomScale = 10.0
@@ -48,7 +49,6 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     }
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-//        Тут еще осталось разобраться как убрать меняющиеся размеры imageView при масштабировании (может схлопнуться в мелкое изображение)
         return memeImageViev
     }
     
