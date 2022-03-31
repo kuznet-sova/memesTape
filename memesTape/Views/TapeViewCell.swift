@@ -18,7 +18,7 @@ class TapeViewCell: UITableViewCell {
     static let reuseIdentifier = String(describing: TapeViewCell.self)
     private var likesCount = 0
     private var isChosen = false
-    private let animateImageView = UIImageView(image: UIImage(systemName: "heart.fill"))
+    private let animateImageView = UIImageView(image: UIImage(named: "heart50.png"))
     
     override func awakeFromNib() {
         super.awakeFromNib()
