@@ -20,7 +20,7 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     private var likesCount = 0
     private var isChosen = false
 //    Не успеваю нарисовать картинку с UIBezierPath, пока просто готовое изображение
-    private let animateImageView = UIImageView(image: UIImage(named: "heart50.png"))
+    private let likeImageView = UIImageView(image: UIImage(named: "heart50.png"))
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,7 +33,7 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
         scrollViev.minimumZoomScale = 1.0
         scrollViev.maximumZoomScale = 10.0
         
-        animateImageView.translatesAutoresizingMaskIntoConstraints = false
+        likeImageView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func configure(memeInfo: Meme) {
@@ -68,16 +68,26 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
             isChosen = false
         } else {
             likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            memeImageViev.addSubview(animateImageView)
-            animateImageView.centerXAnchor.constraint(equalTo: memeImageViev.centerXAnchor).isActive = true
-            animateImageView.centerYAnchor.constraint(equalTo: memeImageViev.centerYAnchor).isActive = true
+            memeImageViev.addSubview(likeImageView)
+            animateImageView(animateView: likeImageView)
+            likeImageView.centerXAnchor.constraint(equalTo: memeImageViev.centerXAnchor).isActive = true
+            likeImageView.centerYAnchor.constraint(equalTo: memeImageViev.centerYAnchor).isActive = true
             likesCount += 1
             likesCounterLebel.text = likesCountUniversal(count: likesCount)
             isChosen = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self.animateImageView.removeFromSuperview()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.likeImageView.removeFromSuperview()
             }
         }
+    }
+    
+    private func animateImageView(animateView: UIImageView) {
+        let animateSide = (animateView.frame.width + animateView.frame.height) / 2
+        let multiplier: CGFloat = animateView.frame.width == animateSide ? 1 : 2
+        let animations = {
+            animateView.frame.size = .init(width: animateSide * multiplier, height: animateSide * multiplier)
+        }
+        UIView.animate(withDuration: 0.2, animations: animations)
     }
     
     @objc func doubleTapFunc() {
