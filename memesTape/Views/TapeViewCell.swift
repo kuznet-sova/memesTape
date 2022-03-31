@@ -60,24 +60,26 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
         return resultString
     }
     
-    private func getFullLikesInfo() {
+    private func getFullLikesInfo(doubleTap: Bool) {
         if isChosen == true {
             likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
             likesCount -= 1
             likesCounterLebel.text = likesCountUniversal(count: likesCount)
             isChosen = false
         } else {
+            if doubleTap == true {
+                memeImageViev.addSubview(likeImageView)
+                animateImageView(animateView: likeImageView)
+                likeImageView.centerXAnchor.constraint(equalTo: memeImageViev.centerXAnchor).isActive = true
+                likeImageView.centerYAnchor.constraint(equalTo: memeImageViev.centerYAnchor).isActive = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.likeImageView.removeFromSuperview()
+                }
+            }
             likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            memeImageViev.addSubview(likeImageView)
-            animateImageView(animateView: likeImageView)
-            likeImageView.centerXAnchor.constraint(equalTo: memeImageViev.centerXAnchor).isActive = true
-            likeImageView.centerYAnchor.constraint(equalTo: memeImageViev.centerYAnchor).isActive = true
             likesCount += 1
             likesCounterLebel.text = likesCountUniversal(count: likesCount)
             isChosen = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.likeImageView.removeFromSuperview()
-            }
         }
     }
     
@@ -91,11 +93,11 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     }
     
     @objc func doubleTapFunc() {
-        getFullLikesInfo()
+        getFullLikesInfo(doubleTap: true)
     }
     
     @IBAction private func likeButtonTap(_ sender: Bool) {
-        getFullLikesInfo()
+        getFullLikesInfo(doubleTap: false)
     }
     
 }
