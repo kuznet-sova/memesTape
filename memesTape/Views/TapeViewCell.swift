@@ -63,19 +63,20 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     private func getFullLikesInfo() {
         if isChosen == true {
             likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-            animateImageView.removeFromSuperview()
             likesCount -= 1
             likesCounterLebel.text = likesCountUniversal(count: likesCount)
             isChosen = false
         } else {
             likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-//            Пока не удалось реализовать скрытие картинки после показа 1-2 сек, пробовала через do sleep(), поэтому пока скрытие по второму даблтапу
             memeImageViev.addSubview(animateImageView)
             animateImageView.centerXAnchor.constraint(equalTo: memeImageViev.centerXAnchor).isActive = true
             animateImageView.centerYAnchor.constraint(equalTo: memeImageViev.centerYAnchor).isActive = true
             likesCount += 1
             likesCounterLebel.text = likesCountUniversal(count: likesCount)
             isChosen = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.animateImageView.removeFromSuperview()
+            }
         }
     }
     
