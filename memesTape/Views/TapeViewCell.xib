@@ -102,6 +102,7 @@
                 <outlet property="memeAuthorLabel" destination="a5s-cD-hbu" id="5ag-dq-VJj"/>
                 <outlet property="memeDescriptionLebel" destination="jdA-TI-Vgt" id="sMb-pU-5Md"/>
                 <outlet property="memeImageViev" destination="FgA-X3-xvl" id="KFn-bf-90k"/>
+                <outlet property="scrollViev" destination="A7o-gE-6C1" id="ay5-Yc-2sR"/>
             </connections>
             <point key="canvasLocation" x="13.043478260869566" y="-39.84375"/>
         </tableViewCell>

@@ -7,8 +7,9 @@
 
 import UIKit
 
-class TapeViewCell: UITableViewCell {
+class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     
+    @IBOutlet var scrollViev: UIScrollView!
     @IBOutlet var memeImageViev: UIImageView!
     @IBOutlet var likesCounterLebel: UILabel!
     @IBOutlet var likeButton: UIButton!
@@ -18,6 +19,7 @@ class TapeViewCell: UITableViewCell {
     static let reuseIdentifier = String(describing: TapeViewCell.self)
     private var likesCount = 0
     private var isChosen = false
+//    Не успеваю нарисовать картинку с UIBezierPath, пока просто готовое изображение
     private let animateImageView = UIImageView(image: UIImage(named: "heart50.png"))
     
     override func awakeFromNib() {
@@ -26,6 +28,9 @@ class TapeViewCell: UITableViewCell {
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapFunc))
         doubleTap.numberOfTapsRequired = 2
         self.addGestureRecognizer(doubleTap)
+        scrollViev.delegate = self
+        scrollViev.minimumZoomScale = 1.0
+        scrollViev.maximumZoomScale = 10.0
         
         animateImageView.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -40,6 +45,11 @@ class TapeViewCell: UITableViewCell {
         likesCounterLebel.text = likesCountUniversal(count: likesCount)
         likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         selectionStyle = .none
+    }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+//        Тут еще осталось разобраться как убрать меняющиеся размеры imageView при масштабировании (может схлопнуться в мелкое изображение)
+        return memeImageViev
     }
     
     private func likesCountUniversal(count: Int) -> String {
@@ -59,6 +69,7 @@ class TapeViewCell: UITableViewCell {
             isChosen = false
         } else {
             likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+//            Пока не удалось реализовать скрытие картинки после показа 1-2 сек, пробовала через do sleep(), поэтому пока скрытие по второму даблтапу
             memeImageViev.addSubview(animateImageView)
             animateImageView.centerXAnchor.constraint(equalTo: memeImageViev.centerXAnchor).isActive = true
             animateImageView.centerYAnchor.constraint(equalTo: memeImageViev.centerYAnchor).isActive = true
