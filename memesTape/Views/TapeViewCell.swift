@@ -32,17 +32,17 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
         scrollViev.delegate = self
         scrollViev.minimumZoomScale = 1.0
         scrollViev.maximumZoomScale = 10.0
-        
+        memeImageViev.image = UIImage(named: "defaultImage.jpg")
         likeImageView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func configure(memeInfo: Meme) {
         NetworkManager.shared.getMemeImage(with: memeInfo.url) { memeImage in
-            self.likesCount = memeInfo.ups
             self.memeImageViev.image = memeImage
-            self.memeAuthorLabel.text = memeInfo.author
-            self.memeDescriptionLebel.text = memeInfo.title
         }
+        likesCount = memeInfo.ups
+        memeAuthorLabel.text = memeInfo.author
+        memeDescriptionLebel.text = memeInfo.title
         likesCounterLebel.text = likesCountUniversal(count: likesCount)
         likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         selectionStyle = .none
