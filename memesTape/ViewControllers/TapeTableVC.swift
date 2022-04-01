@@ -41,17 +41,17 @@ class TapeTableVC: UITableViewController {
         refreshLabel.textColor = .gray
         refreshLabel.textAlignment = .left
         refreshLabel.text = "Loading..."
-//        Хотела добавить лейбл над навбаром, но кроме как подбор значений не нашла способ.
-//        Подскажите есть ли какой вариант указать расположение лейбла над навигешн контроллером?
+        //        Хотела добавить лейбл над навбаром, но кроме как подбор значений не нашла способ.
+        //        Подскажите есть ли какой вариант указать расположение лейбла над навигешн контроллером?
         refreshLabel.frame = CGRect(x: 20, y: -100, width: 80, height: 30)
         
         tableView.addSubview(refreshLabel)
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memes.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TapeViewCell.reuseIdentifier, for: indexPath) as! TapeViewCell
         
@@ -60,10 +60,10 @@ class TapeTableVC: UITableViewController {
         
         return cell
     }
-
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let tableViewSides = [tableView.frame.width, tableView.frame.height]
-
+        
         guard let minSide = tableViewSides.min() else {
             return tableView.frame.width/2
         }

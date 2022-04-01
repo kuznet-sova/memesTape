@@ -36,19 +36,20 @@ class NetworkManager {
             complition(UIImage(named: "defaultImage.jpg")!)
             return
         }
-
+        
         DispatchQueue.global(qos: .background).async {
             let memeImage: UIImage?
-
+            
             if let memeImageData = try? Data(contentsOf: stringMemeImageUrl) {
                 memeImage = UIImage(data: memeImageData)
             } else {
                 memeImage = UIImage(named: "defaultImage.jpg")
             }
-
+            
             DispatchQueue.main.async {
                 complition(memeImage!)
             }
         }
     }
+    
 }

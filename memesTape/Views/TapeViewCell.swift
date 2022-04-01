@@ -19,17 +19,17 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     static let reuseIdentifier = String(describing: TapeViewCell.self)
     private var likesCount = 0
     private var isChosen = false
-//    Не успеваю нарисовать картинку с UIBezierPath, пока просто готовое изображение
+    //    Не успеваю нарисовать картинку с UIBezierPath, пока просто готовое изображение
     private let likeImageView = UIImageView(image: UIImage(named: "heart50.png"))
     var spinnerView: UIActivityIndicatorView?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        Сделать даблтап только по картинке, а не по всей ячейке пока не получилось
+        //        Сделать даблтап только по картинке, а не по всей ячейке пока не получилось
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapFunc))
         doubleTap.numberOfTapsRequired = 2
         self.addGestureRecognizer(doubleTap)
-//        Тут еще осталось разобраться как поправить скачущие размеры imageView при масштабировании (схлопывается картинка при увеличении, скрываются лейблы с автором/описанием, картинка дергается при приближении)
+        //        Тут еще осталось разобраться как поправить скачущие размеры imageView при масштабировании (схлопывается картинка при увеличении, скрываются лейблы с автором/описанием, картинка дергается при приближении)
         scrollViev.delegate = self
         scrollViev.minimumZoomScale = 1.0
         scrollViev.maximumZoomScale = 10.0
@@ -57,9 +57,9 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     
     private func likesCountUniversal(count: Int) -> String {
         let formatString = NSLocalizedString("likes count",
-                                                      comment: "likes count string format to be found in Localized.stringsdict")
+                                             comment: "likes count string format to be found in Localized.stringsdict")
         let resultString = String.localizedStringWithFormat(formatString, count)
-    
+        
         return resultString
     }
     
