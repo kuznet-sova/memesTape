@@ -10,8 +10,8 @@ import UIKit
 class NetworkManager {
     static let shared = NetworkManager()
     
-    func fetchData(with complition: @escaping (MemesBase) -> Void) {
-        let memesUrl = "https://meme-api.herokuapp.com/gimme/5"
+    func fetchData(postCount: Int, with complition: @escaping (MemesBase) -> Void) {
+        let memesUrl = "https://meme-api.herokuapp.com/gimme/\(postCount)"
         
         guard let url = URL(string: memesUrl) else { return }
         

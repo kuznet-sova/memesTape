@@ -16,12 +16,15 @@ class TapeTableVC: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         setupTableView()
         
-        NetworkManager.shared.fetchData() { memesBase in
+        NetworkManager.shared.fetchData(postCount: 5) { memesBase in
             DispatchQueue.main.async {
                 self.memes = memesBase.memes
                 self.tableView.reloadData()
             }
         }
+        
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(callPullToRefresh), for: .valueChanged)
     }
     
     private func setupTableView() {
@@ -55,11 +58,23 @@ class TapeTableVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == memes.count-1 {
-            NetworkManager.shared.fetchData() { memesBase in
+            NetworkManager.shared.fetchData(postCount: 5) { memesBase in
                 DispatchQueue.main.async {
                     self.memes.append(contentsOf: memesBase.memes)
                     self.tableView.reloadData()
                 }
+            }
+        }
+    }
+    
+    @objc func callPullToRefresh(){
+        let historyMemesList = memes
+        NetworkManager.shared.fetchData(postCount: 1) { memesBase in
+            DispatchQueue.main.async {
+                self.memes = memesBase.memes
+                self.memes.append(contentsOf: historyMemesList)
+                self.tableView.reloadData()
+                self.tableView.refreshControl?.endRefreshing()
             }
         }
     }
