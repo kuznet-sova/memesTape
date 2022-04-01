@@ -21,6 +21,7 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     private var isChosen = false
 //    Не успеваю нарисовать картинку с UIBezierPath, пока просто готовое изображение
     private let likeImageView = UIImageView(image: UIImage(named: "heart50.png"))
+    var spinnerView: UIActivityIndicatorView?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,11 +35,13 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
         scrollViev.maximumZoomScale = 10.0
         memeImageViev.image = UIImage(named: "defaultImage.jpg")
         likeImageView.translatesAutoresizingMaskIntoConstraints = false
+        spinnerView = SpinnerViewController().showSpinner(in: memeImageViev)
     }
     
     func configure(memeInfo: Meme) {
         NetworkManager.shared.getMemeImage(with: memeInfo.url) { memeImage in
             self.memeImageViev.image = memeImage
+            self.spinnerView?.stopAnimating()
         }
         likesCount = memeInfo.ups
         memeAuthorLabel.text = memeInfo.author

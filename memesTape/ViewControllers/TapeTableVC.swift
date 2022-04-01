@@ -9,12 +9,15 @@ import UIKit
 
 class TapeTableVC: UITableViewController {
     private var memes: [Meme] = []
+    private let refreshLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Memes tape"
         navigationController?.navigationBar.prefersLargeTitles = true
         setupTableView()
+        setRefreshLabel()
+        refreshLabel.isHidden = true
         
         NetworkManager.shared.fetchData(postCount: 5) { memesBase in
             DispatchQueue.main.async {
@@ -33,6 +36,17 @@ class TapeTableVC: UITableViewController {
         tableView.register(nib, forCellReuseIdentifier: TapeViewCell.reuseIdentifier)
         tableView.allowsSelection = false
     }
+    
+    private func setRefreshLabel() {
+        refreshLabel.textColor = .gray
+        refreshLabel.textAlignment = .left
+        refreshLabel.text = "Loading..."
+//        Хотела добавить лейбл над навбаром, но кроме как подбор значений не нашла способ.
+//        Подскажите есть ли какой вариант указать расположение лейбла над навигешн контроллером?
+        refreshLabel.frame = CGRect(x: 20, y: -100, width: 80, height: 30)
+        
+        tableView.addSubview(refreshLabel)
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memes.count
@@ -41,6 +55,7 @@ class TapeTableVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TapeViewCell.reuseIdentifier, for: indexPath) as! TapeViewCell
         
+        cell.spinnerView?.startAnimating()
         cell.configure(memeInfo: memes[indexPath.row])
         
         return cell
@@ -69,12 +84,17 @@ class TapeTableVC: UITableViewController {
     
     @objc func callPullToRefresh(){
         let historyMemesList = memes
+        if tableView.refreshControl?.isRefreshing == true{
+            self.refreshLabel.isHidden = false
+        }
+        
         NetworkManager.shared.fetchData(postCount: 1) { memesBase in
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.memes = memesBase.memes
                 self.memes.append(contentsOf: historyMemesList)
                 self.tableView.reloadData()
                 self.tableView.refreshControl?.endRefreshing()
+                self.refreshLabel.isHidden = true
             }
         }
     }
