@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol CellDelegate: AnyObject {
+    func openMessagesVC()
+}
+
 class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     
     @IBOutlet var scrollViev: UIScrollView!
@@ -22,6 +26,7 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     //    Не успеваю нарисовать картинку с UIBezierPath, пока просто готовое изображение
     private let likeImageView = UIImageView(image: UIImage(named: "heart50.png"))
     var spinnerView: UIActivityIndicatorView?
+    weak var delegate: CellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -99,8 +104,12 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
         getFullLikesInfo(doubleTap: true)
     }
     
-    @IBAction private func likeButtonTap(_ sender: Bool) {
+    @IBAction private func likeButtonTap(_ sender: UIButton) {
         getFullLikesInfo(doubleTap: false)
+    }
+    
+    @IBAction private func messageButtonTap(_ sender: UIButton) {
+        delegate?.openMessagesVC()
     }
     
 }

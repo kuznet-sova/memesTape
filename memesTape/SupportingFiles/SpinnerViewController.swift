@@ -13,6 +13,7 @@ class SpinnerViewController: UIViewController {
     func showSpinner(in view: UIView) -> UIActivityIndicatorView {
         view.backgroundColor = UIColor(white: 0, alpha: 0.7)
         spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.color = .gray
         
         view.addSubview(spinner)
         spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
