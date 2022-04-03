@@ -13,7 +13,10 @@
 		8C33156B27EA66D000D8E000 /* TapeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C33156A27EA66D000D8E000 /* TapeViewCell.xib */; };
 		8C4E185627F4908900F557E1 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E185827F4908900F557E1 /* Localizable.stringsdict */; };
 		8C660A3327F793250027B338 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C660A3227F793250027B338 /* SpinnerViewController.swift */; };
-		8CABD48A27F8FE7700A974F8 /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CABD48927F8FE7700A974F8 /* MessagesVC.swift */; };
+		8CABD48C27F9DDC300A974F8 /* MessagesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CABD48B27F9DDC300A974F8 /* MessagesViewCell.swift */; };
+		8CABD48E27F9E17C00A974F8 /* MessagesViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CABD48D27F9E17C00A974F8 /* MessagesViewCell.xib */; };
+		8CD532EF27FA14B500146573 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD532EE27FA14B500146573 /* Message.swift */; };
+		8CD532F127FA150200146573 /* MessagesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD532F027FA150200146573 /* MessagesTableVC.swift */; };
 		8CDA4C2F27E7456A009489D0 /* TapeTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDA4C2E27E7456A009489D0 /* TapeTableVC.swift */; };
 		8CDA4C3E27E7495C009489D0 /* TapeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDA4C3D27E7495C009489D0 /* TapeViewCell.swift */; };
 		8CE1FE0427F49DBA00F03CDC /* MemesBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE1FE0327F49DBA00F03CDC /* MemesBase.swift */; };
@@ -30,7 +33,10 @@
 		8C4E185727F4908900F557E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		8C4E185927F490BB00F557E1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		8C660A3227F793250027B338 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
-		8CABD48927F8FE7700A974F8 /* MessagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
+		8CABD48B27F9DDC300A974F8 /* MessagesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewCell.swift; sourceTree = "<group>"; };
+		8CABD48D27F9E17C00A974F8 /* MessagesViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessagesViewCell.xib; sourceTree = "<group>"; };
+		8CD532EE27FA14B500146573 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		8CD532F027FA150200146573 /* MessagesTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableVC.swift; sourceTree = "<group>"; };
 		8CDA4C2E27E7456A009489D0 /* TapeTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeTableVC.swift; sourceTree = "<group>"; };
 		8CDA4C3D27E7495C009489D0 /* TapeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TapeViewCell.swift; path = memesTape/Views/TapeViewCell.swift; sourceTree = SOURCE_ROOT; };
 		8CE1FE0327F49DBA00F03CDC /* MemesBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemesBase.swift; sourceTree = "<group>"; };
@@ -82,6 +88,8 @@
 			children = (
 				8CDA4C3D27E7495C009489D0 /* TapeViewCell.swift */,
 				8C33156A27EA66D000D8E000 /* TapeViewCell.xib */,
+				8CABD48B27F9DDC300A974F8 /* MessagesViewCell.swift */,
+				8CABD48D27F9E17C00A974F8 /* MessagesViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -90,7 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				8CDA4C2E27E7456A009489D0 /* TapeTableVC.swift */,
-				8CABD48927F8FE7700A974F8 /* MessagesVC.swift */,
+				8CD532F027FA150200146573 /* MessagesTableVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -99,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				8CE1FE0327F49DBA00F03CDC /* MemesBase.swift */,
+				8CD532EE27FA14B500146573 /* Message.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -193,6 +202,7 @@
 				8C4E185627F4908900F557E1 /* Localizable.stringsdict in Resources */,
 				8C33156B27EA66D000D8E000 /* TapeViewCell.xib in Resources */,
 				8C0C6F4D27E5070A0042AA4A /* Assets.xcassets in Resources */,
+				8CABD48E27F9E17C00A974F8 /* MessagesViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,9 +214,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CE1FE0427F49DBA00F03CDC /* MemesBase.swift in Sources */,
-				8CABD48A27F8FE7700A974F8 /* MessagesVC.swift in Sources */,
 				8CDA4C2F27E7456A009489D0 /* TapeTableVC.swift in Sources */,
+				8CD532EF27FA14B500146573 /* Message.swift in Sources */,
+				8CD532F127FA150200146573 /* MessagesTableVC.swift in Sources */,
 				8CE1FE0627F49DCF00F03CDC /* NetworkManager.swift in Sources */,
+				8CABD48C27F9DDC300A974F8 /* MessagesViewCell.swift in Sources */,
 				8C0C6F4427E507090042AA4A /* AppDelegate.swift in Sources */,
 				8C660A3327F793250027B338 /* SpinnerViewController.swift in Sources */,
 				8CDA4C3E27E7495C009489D0 /* TapeViewCell.swift in Sources */,

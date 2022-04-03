@@ -57,7 +57,7 @@ class TapeTableVC: UITableViewController {
         
         cell.spinnerView?.startAnimating()
         cell.configure(memeInfo: memes[indexPath.row])
-        cell.delegate = self
+        cell.cellDelegate = self
         
         return cell
     }
@@ -103,8 +103,9 @@ class TapeTableVC: UITableViewController {
 }
 
 extension TapeTableVC: CellDelegate {
-    func openMessagesVC() {
-        let messagesVC: MessagesVC = MessagesVC()
-        self.present(messagesVC, animated: true, completion: nil)
+    func openMessagesVC(messageInfo: Message) {
+        let messagesTableVC: MessagesTableVC = MessagesTableVC()
+        messagesTableVC.messagesInfo.append(messageInfo)
+        self.present(messagesTableVC, animated: true, completion: nil)
     }
 }

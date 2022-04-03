@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CellDelegate: AnyObject {
-    func openMessagesVC()
+    func openMessagesVC(messageInfo: Message)
 }
 
 class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
@@ -26,7 +26,8 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     //    Не успеваю нарисовать картинку с UIBezierPath, пока просто готовое изображение
     private let likeImageView = UIImageView(image: UIImage(named: "heart50.png"))
     var spinnerView: UIActivityIndicatorView?
-    weak var delegate: CellDelegate?
+    weak var cellDelegate: CellDelegate?
+    var messageInfo = Message(author: "No name", description: "...")
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -48,12 +49,14 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
             self.memeImageViev.image = memeImage
             self.spinnerView?.stopAnimating()
         }
+        
         likesCount = memeInfo.ups
         memeAuthorLabel.text = memeInfo.author
         memeDescriptionLebel.text = memeInfo.title
         likesCounterLebel.text = likesCountUniversal(count: likesCount)
         likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         selectionStyle = .none
+        messageInfo = Message(author: memeInfo.author, description: memeInfo.title)
     }
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
@@ -109,7 +112,7 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     }
     
     @IBAction private func messageButtonTap(_ sender: UIButton) {
-        delegate?.openMessagesVC()
+        cellDelegate?.openMessagesVC(messageInfo: messageInfo)
     }
     
 }
