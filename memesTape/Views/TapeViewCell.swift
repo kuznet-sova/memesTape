@@ -56,7 +56,7 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
         likesCounterLebel.text = likesCountUniversal(count: likesCount)
         likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         selectionStyle = .none
-        messageInfo = Message(author: memeInfo.author, description: memeInfo.title)
+        messageInfo = Message(author: "🥷 @\(memeInfo.author)", description: memeInfo.title)
     }
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {

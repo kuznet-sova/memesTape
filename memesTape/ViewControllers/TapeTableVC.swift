@@ -106,6 +106,6 @@ extension TapeTableVC: CellDelegate {
     func openMessagesVC(messageInfo: Message) {
         let messagesTableVC: MessagesTableVC = MessagesTableVC()
         messagesTableVC.messagesInfo.append(messageInfo)
-        self.present(messagesTableVC, animated: true, completion: nil)
+        navigationController?.pushViewController(messagesTableVC, animated: true)
     }
 }
