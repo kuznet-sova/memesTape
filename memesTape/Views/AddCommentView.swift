@@ -17,7 +17,7 @@ class AddCommentView: UIView {
     
     private let commentTextView: CommentInputTextView = {
         let commentTextView = CommentInputTextView()
-        commentTextView.placeholderLabel.text = "Add a comment"
+        commentTextView.placeholderLabel.text = "Add comment"
         commentTextView.isScrollEnabled = false
         commentTextView.layer.cornerRadius = 12
         commentTextView.font = UIFont.systemFont(ofSize: 18)
