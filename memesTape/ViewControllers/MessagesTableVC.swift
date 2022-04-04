@@ -9,6 +9,7 @@ import UIKit
 
 class MessagesTableVC: UITableViewController {
     var messagesInfo: [Message] = []
+    var commentAuthor = ""
     
     override var inputAccessoryView: UIView? {
         return containerView
@@ -44,6 +45,7 @@ class MessagesTableVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MessagesViewCell.reuseIdentifier, for: indexPath) as! MessagesViewCell
         
+        commentAuthor = messagesInfo[indexPath.row].author
         cell.messageAuthor.text = messagesInfo[indexPath.row].author
         cell.messageDescription.text = messagesInfo[indexPath.row].description
         
@@ -54,6 +56,11 @@ class MessagesTableVC: UITableViewController {
 
 extension MessagesTableVC: AddCommentViewDelegate {
     func didSubmit(comment: String) {
+        let newComment = Message(author: commentAuthor, description: comment)
+        messagesInfo.append(newComment)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
         self.containerView.clearCommentTextField()
     }
 }
