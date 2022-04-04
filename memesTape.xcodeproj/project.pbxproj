@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C09B92D27FB2D870014ED96 /* AddCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09B92C27FB2D870014ED96 /* AddCommentView.swift */; };
+		8C09B92F27FB4A050014ED96 /* CommentInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09B92E27FB4A050014ED96 /* CommentInputTextView.swift */; };
 		8C0C6F4427E507090042AA4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C6F4327E507090042AA4A /* AppDelegate.swift */; };
 		8C0C6F4D27E5070A0042AA4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C0C6F4C27E5070A0042AA4A /* Assets.xcassets */; };
 		8C0C6F5027E5070A0042AA4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0C6F4E27E5070A0042AA4A /* LaunchScreen.storyboard */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8C09B92C27FB2D870014ED96 /* AddCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentView.swift; sourceTree = "<group>"; };
+		8C09B92E27FB4A050014ED96 /* CommentInputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentInputTextView.swift; sourceTree = "<group>"; };
 		8C0C6F4027E507090042AA4A /* memesTape.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = memesTape.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C0C6F4327E507090042AA4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C0C6F4C27E5070A0042AA4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -90,6 +94,8 @@
 				8C33156A27EA66D000D8E000 /* TapeViewCell.xib */,
 				8CABD48B27F9DDC300A974F8 /* MessagesViewCell.swift */,
 				8CABD48D27F9E17C00A974F8 /* MessagesViewCell.xib */,
+				8C09B92C27FB2D870014ED96 /* AddCommentView.swift */,
+				8C09B92E27FB4A050014ED96 /* CommentInputTextView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -215,7 +221,9 @@
 			files = (
 				8CE1FE0427F49DBA00F03CDC /* MemesBase.swift in Sources */,
 				8CDA4C2F27E7456A009489D0 /* TapeTableVC.swift in Sources */,
+				8C09B92D27FB2D870014ED96 /* AddCommentView.swift in Sources */,
 				8CD532EF27FA14B500146573 /* Message.swift in Sources */,
+				8C09B92F27FB4A050014ED96 /* CommentInputTextView.swift in Sources */,
 				8CD532F127FA150200146573 /* MessagesTableVC.swift in Sources */,
 				8CE1FE0627F49DCF00F03CDC /* NetworkManager.swift in Sources */,
 				8CABD48C27F9DDC300A974F8 /* MessagesViewCell.swift in Sources */,

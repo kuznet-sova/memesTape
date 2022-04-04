@@ -14,7 +14,6 @@ class TapeTableVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Memes tape"
-        navigationController?.navigationBar.prefersLargeTitles = true
         setupTableView()
         setRefreshLabel()
         refreshLabel.isHidden = true

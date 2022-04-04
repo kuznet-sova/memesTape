@@ -10,6 +10,20 @@ import UIKit
 class MessagesTableVC: UITableViewController {
     var messagesInfo: [Message] = []
     
+    override var inputAccessoryView: UIView? {
+        return containerView
+    }
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
+    private lazy var containerView: AddCommentView = {
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
+        let addCommentView = AddCommentView(frame: frame)
+        addCommentView.delegate = self
+        return addCommentView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Messages"
@@ -34,5 +48,12 @@ class MessagesTableVC: UITableViewController {
         cell.messageDescription.text = messagesInfo[indexPath.row].description
         
         return cell
+    }
+    
+}
+
+extension MessagesTableVC: AddCommentViewDelegate {
+    func didSubmit(comment: String) {
+        self.containerView.clearCommentTextField()
     }
 }
