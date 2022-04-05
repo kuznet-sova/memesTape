@@ -32,7 +32,6 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
         scrollViev.delegate = self
         scrollViev.minimumZoomScale = 1.0
         scrollViev.maximumZoomScale = 10.0
-        memeImageViev.image = UIImage(named: "defaultImage.jpg")
         likeImageView.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -90,6 +89,10 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
             animateView.frame.size = .init(width: animateSide * multiplier, height: animateSide * multiplier)
         }
         UIView.animate(withDuration: 0.2, animations: animations)
+    }
+    
+    override func prepareForReuse() {
+        memeImageViev.image = UIImage(named: "defaultImage.jpg")
     }
     
     @objc func doubleTapFunc() {
