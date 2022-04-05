@@ -11,7 +11,7 @@ class NetworkManager {
     static let shared = NetworkManager()
     
     func fetchData(with complition: @escaping (MemesBase) -> Void) {
-        let memesUrl = "https://meme-api.herokuapp.com/gimme/5"
+        let memesUrl = URL.memesUrl
         
         guard let url = URL(string: memesUrl) else { return }
         
@@ -50,5 +50,12 @@ class NetworkManager {
                 complition(memeImage!)
             }
         }
+    }
+}
+
+extension URL {
+//    Пока просто вынесла ссылку сюда, в пр с 3 дз уже вносила изменения в работу с url, докрутить хочу уже в следующей ветке
+    static var memesUrl: String {
+        String("https://meme-api.herokuapp.com/gimme/5")
     }
 }

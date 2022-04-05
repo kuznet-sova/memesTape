@@ -61,13 +61,13 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     }
     
     private func getFullLikesInfo(doubleTap: Bool) {
-        if isChosen == true {
+        if isChosen {
             likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
             likesCount -= 1
             likesCounterLebel.text = likesCountUniversal(count: likesCount)
             isChosen = false
         } else {
-            if doubleTap == true {
+            if doubleTap {
                 memeImageViev.addSubview(likeImageView)
                 animateImageView(animateView: likeImageView)
                 likeImageView.centerXAnchor.constraint(equalTo: memeImageViev.centerXAnchor).isActive = true
