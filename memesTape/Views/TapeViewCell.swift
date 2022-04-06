@@ -31,7 +31,7 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
 //        Тут еще осталось разобраться как поправить скачущие размеры imageView при масштабировании (схлопывается картинка при увеличении, скрываются лейблы с автором/описанием, картинка дергается при приближении)
         scrollViev.delegate = self
         scrollViev.minimumZoomScale = 1.0
-        scrollViev.maximumZoomScale = 10.0
+        scrollViev.maximumZoomScale = 2.0
         likeImageView.translatesAutoresizingMaskIntoConstraints = false
     }
     
