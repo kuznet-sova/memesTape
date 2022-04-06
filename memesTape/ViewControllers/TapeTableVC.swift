@@ -30,22 +30,25 @@ class TapeTableVC: UITableViewController {
         tableView.register(nib, forCellReuseIdentifier: TapeViewCell.reuseIdentifier)
         tableView.allowsSelection = false
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memes.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TapeViewCell.reuseIdentifier, for: indexPath) as! TapeViewCell
         
+        NetworkManager.shared.getMemeImage(with: memes[indexPath.row].url) { memeImage in
+            cell.memeImageViev.image = memeImage
+        }
         cell.configure(memeInfo: memes[indexPath.row])
         
         return cell
     }
-
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let tableViewSides = [tableView.frame.width, tableView.frame.height]
-
+        
         guard let minSide = tableViewSides.min() else {
             return tableView.frame.width/2
         }

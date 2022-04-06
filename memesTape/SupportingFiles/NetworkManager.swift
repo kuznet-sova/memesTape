@@ -9,6 +9,7 @@ import UIKit
 
 class NetworkManager {
     static let shared = NetworkManager()
+    var cashedImages: [String : UIImage] = [:]
     
     func fetchData(with complition: @escaping (MemesBase) -> Void) {
         let memesUrl = URL.memesUrl
@@ -30,31 +31,30 @@ class NetworkManager {
     }
     
     func getMemeImage(with url: String?, with complition: @escaping (UIImage) -> Void) {
-        guard let memeImageUrl = url,
-              let stringMemeImageUrl = URL(string: memeImageUrl)
-        else {
-            complition(UIImage(named: "defaultImage.jpg")!)
+        let memeImageUrl = url
+        guard let stringMemeImageUrl = memeImageUrl else { return }
+        
+        if let cashedImage = self.cashedImages[stringMemeImageUrl] {
+            complition(cashedImage)
             return
         }
-
+        
         DispatchQueue.global(qos: .background).async {
-            let memeImage: UIImage?
-
-            if let memeImageData = try? Data(contentsOf: stringMemeImageUrl) {
-                memeImage = UIImage(data: memeImageData)
-            } else {
-                memeImage = UIImage(named: "defaultImage.jpg")
-            }
-
+            guard let memeImageUrl = URL(string: stringMemeImageUrl),
+                  let memeImageData = try? Data(contentsOf: memeImageUrl),
+                  let memeImage = UIImage(data: memeImageData) else { return }
+            
             DispatchQueue.main.async {
-                complition(memeImage!)
+                self.cashedImages.updateValue(memeImage, forKey: stringMemeImageUrl)
+                complition(memeImage)
             }
         }
     }
+    
 }
 
 extension URL {
-//    Пока просто вынесла ссылку сюда, в пр с 3 дз уже вносила изменения в работу с url, докрутить хочу уже в следующей ветке
+    //    Пока просто вынесла ссылку сюда, в пр с 3 дз уже вносила изменения в работу с url, докрутить хочу уже в следующей ветке
     static var memesUrl: String {
         String("https://meme-api.herokuapp.com/gimme/5")
     }
