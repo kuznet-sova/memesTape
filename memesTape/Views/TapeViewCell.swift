@@ -35,11 +35,9 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapFunc))
         doubleTap.numberOfTapsRequired = 2
         self.addGestureRecognizer(doubleTap)
-        //        Тут еще осталось разобраться как поправить скачущие размеры imageView при масштабировании (схлопывается картинка при увеличении, скрываются лейблы с автором/описанием, картинка дергается при приближении)
         scrollViev.delegate = self
         scrollViev.minimumZoomScale = 1.0
-        scrollViev.maximumZoomScale = 10.0
-        memeImageViev.image = UIImage(named: "defaultImage.jpg")
+        scrollViev.maximumZoomScale = 2.0
         likeImageView.translatesAutoresizingMaskIntoConstraints = false
         spinnerView = SpinnerViewController().showSpinner(in: memeImageViev)
     }
@@ -72,13 +70,13 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     }
     
     private func getFullLikesInfo(doubleTap: Bool) {
-        if isChosen == true {
+        if isChosen {
             likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
             likesCount -= 1
             likesCounterLebel.text = likesCountUniversal(count: likesCount)
             isChosen = false
         } else {
-            if doubleTap == true {
+            if doubleTap {
                 memeImageViev.addSubview(likeImageView)
                 animateImageView(animateView: likeImageView)
                 likeImageView.centerXAnchor.constraint(equalTo: memeImageViev.centerXAnchor).isActive = true
@@ -101,6 +99,10 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
             animateView.frame.size = .init(width: animateSide * multiplier, height: animateSide * multiplier)
         }
         UIView.animate(withDuration: 0.2, animations: animations)
+    }
+    
+    override func prepareForReuse() {
+        memeImageViev.image = UIImage(named: "defaultImage.jpg")
     }
     
     @objc func doubleTapFunc() {

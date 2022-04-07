@@ -11,7 +11,6 @@ class SpinnerViewController: UIViewController {
     var spinner = UIActivityIndicatorView(style: .large)
     
     func showSpinner(in view: UIView) -> UIActivityIndicatorView {
-        view.backgroundColor = UIColor(white: 0, alpha: 0.7)
         spinner.translatesAutoresizingMaskIntoConstraints = false
         spinner.color = .gray
         

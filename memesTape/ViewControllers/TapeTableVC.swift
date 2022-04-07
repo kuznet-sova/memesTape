@@ -55,6 +55,10 @@ class TapeTableVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: TapeViewCell.reuseIdentifier, for: indexPath) as! TapeViewCell
         
         cell.spinnerView?.startAnimating()
+        NetworkManager.shared.getMemeImage(with: memes[indexPath.row].url) { memeImage in
+            cell.spinnerView?.stopAnimating()
+            cell.memeImageViev.image = memeImage
+        }
         cell.configure(memeInfo: memes[indexPath.row])
         cell.cellDelegate = self
         
