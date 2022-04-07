@@ -9,7 +9,7 @@ import UIKit
 
 class NetworkManager {
     static let shared = NetworkManager()
-    var cashedImages: [String : UIImage] = [:]
+    private var cashedImages: [String : UIImage] = [:]
     
     func fetchData(postCount: Int, with complition: @escaping (MemesBase) -> Void) {
         let memesUrl = URL.memesUrl + String(postCount)
@@ -34,19 +34,23 @@ class NetworkManager {
         let memeImageUrl = url
         guard let stringMemeImageUrl = memeImageUrl else { return }
         
-        if let cashedImage = self.cashedImages[stringMemeImageUrl] {
-            complition(cashedImage)
-            return
-        }
-        
-        DispatchQueue.global(qos: .background).async {
-            guard let memeImageUrl = URL(string: stringMemeImageUrl),
-                  let memeImageData = try? Data(contentsOf: memeImageUrl),
-                  let memeImage = UIImage(data: memeImageData) else { return }
+        if memeImageUrl == nil {
+            complition(UIImage(named: "defaultImage.jpg")!)
+        } else {
+            if let cashedImage = self.cashedImages[stringMemeImageUrl] {
+                complition(cashedImage)
+                return
+            }
             
-            DispatchQueue.main.async {
+            DispatchQueue.global(qos: .background).async {
+                guard let memeImageUrl = URL(string: stringMemeImageUrl),
+                      let memeImageData = try? Data(contentsOf: memeImageUrl),
+                      let memeImage = UIImage(data: memeImageData) else { return }
                 self.cashedImages.updateValue(memeImage, forKey: stringMemeImageUrl)
-                complition(memeImage)
+                
+                DispatchQueue.main.async {
+                    complition(memeImage)
+                }
             }
         }
     }

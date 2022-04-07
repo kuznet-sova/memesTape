@@ -43,11 +43,6 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     }
     
     func configure(memeInfo: Meme) {
-        NetworkManager.shared.getMemeImage(with: memeInfo.url) { memeImage in
-            self.memeImageViev.image = memeImage
-            self.spinnerView?.stopAnimating()
-        }
-        
         likesCount = memeInfo.ups
         memeAuthorLabel.text = memeInfo.author
         memeDescriptionLebel.text = memeInfo.title
@@ -102,7 +97,7 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     }
     
     override func prepareForReuse() {
-        memeImageViev.image = UIImage(named: "defaultImage.jpg")
+        memeImageViev.image = nil
     }
     
     @objc func doubleTapFunc() {
