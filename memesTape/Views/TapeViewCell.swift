@@ -56,6 +56,10 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
         return memeImageViev
     }
     
+    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+        scrollView.setZoomScale(1.0, animated: true)
+    }
+    
     private func likesCountUniversal(count: Int) -> String {
         let formatString = NSLocalizedString("likes count",
                                              comment: "likes count string format to be found in Localized.stringsdict")
