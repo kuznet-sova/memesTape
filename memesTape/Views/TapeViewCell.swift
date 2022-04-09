@@ -7,8 +7,9 @@
 
 import UIKit
 
-class TapeViewCell: UITableViewCell {
+class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     
+    @IBOutlet var scrollViev: UIScrollView!
     @IBOutlet var memeImageViev: UIImageView!
     @IBOutlet var likesCounterLebel: UILabel!
     @IBOutlet var likeButton: UIButton!
@@ -16,54 +17,90 @@ class TapeViewCell: UITableViewCell {
     @IBOutlet var memeDescriptionLebel: UILabel!
     
     static let reuseIdentifier = String(describing: TapeViewCell.self)
-    private var randomInt = Int.random(in: 1...100)
+    private var likesCount = 0
     private var isChosen = false
+    //    Не успеваю нарисовать картинку с UIBezierPath, пока просто готовое изображение
+    private let likeImageView = UIImageView(image: UIImage(named: "heart50.png"))
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        Сделать даблтап только по картинке, а не по всей ячейке пока не получилось
+        //        Сделать даблтап только по картинке, а не по всей ячейке пока не получилось
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapFunc))
         doubleTap.numberOfTapsRequired = 2
         self.addGestureRecognizer(doubleTap)
+        scrollViev.delegate = self
+        scrollViev.minimumZoomScale = 1.0
+        scrollViev.maximumZoomScale = 2.0
+        likeImageView.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func configure(fullPost: FullPost) {
-        memeImageViev.image = UIImage(named: fullPost.memeImageName)
-        memeAuthorLabel.text = fullPost.memeAuthor
-        memeDescriptionLebel.text = fullPost.memeDescription
-        likesCounterLebel.text = likesCountUniversal(count: randomInt)
+    func configure(memeInfo: Meme) {
+        likesCount = memeInfo.ups
+        memeAuthorLabel.text = memeInfo.author
+        memeDescriptionLebel.text = memeInfo.title
+        likesCounterLebel.text = likesCountUniversal(count: likesCount)
         likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         selectionStyle = .none
     }
     
-    private func likesCountUniversal(count: Int) -> String {
-        let formatString : String = NSLocalizedString("likes count",
-                                                      comment: "likes count string format to be found in Localized.stringsdict")
-        let resultString : String = String.localizedStringWithFormat(formatString, count)
-    
-        return resultString;
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return memeImageViev
     }
     
-    private func getFullLikesInfo() {
-        if isChosen == true {
+    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+        scrollView.setZoomScale(1.0, animated: true)
+    }
+    
+    private func likesCountUniversal(count: Int) -> String {
+        let formatString = NSLocalizedString("likes count",
+                                             comment: "likes count string format to be found in Localized.stringsdict")
+        let resultString = String.localizedStringWithFormat(formatString, count)
+        
+        return resultString
+    }
+    
+    private func getFullLikesInfo(doubleTap: Bool) {
+        if isChosen {
             likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-            randomInt -= 1
-            likesCounterLebel.text = likesCountUniversal(count: randomInt)
+            likesCount -= 1
+            likesCounterLebel.text = likesCountUniversal(count: likesCount)
             isChosen = false
         } else {
+            if doubleTap {
+                memeImageViev.addSubview(likeImageView)
+                animateImageView(animateView: likeImageView)
+                likeImageView.centerXAnchor.constraint(equalTo: memeImageViev.centerXAnchor).isActive = true
+                likeImageView.centerYAnchor.constraint(equalTo: memeImageViev.centerYAnchor).isActive = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.likeImageView.removeFromSuperview()
+                }
+            }
             likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            randomInt += 1
-            likesCounterLebel.text = likesCountUniversal(count: randomInt)
+            likesCount += 1
+            likesCounterLebel.text = likesCountUniversal(count: likesCount)
             isChosen = true
         }
     }
     
+    private func animateImageView(animateView: UIImageView) {
+        let animateSide = (animateView.frame.width + animateView.frame.height) / 2
+        let multiplier: CGFloat = animateView.frame.width == animateSide ? 1 : 2
+        let animations = {
+            animateView.frame.size = .init(width: animateSide * multiplier, height: animateSide * multiplier)
+        }
+        UIView.animate(withDuration: 0.2, animations: animations)
+    }
+    
+    override func prepareForReuse() {
+        memeImageViev.image = UIImage(named: "defaultImage.jpg")
+    }
+    
     @objc func doubleTapFunc() {
-        getFullLikesInfo()
+        getFullLikesInfo(doubleTap: true)
     }
     
     @IBAction private func likeButtonTap(_ sender: Bool) {
-        getFullLikesInfo()
+        getFullLikesInfo(doubleTap: false)
     }
     
 }

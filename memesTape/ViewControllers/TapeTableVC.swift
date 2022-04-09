@@ -8,13 +8,20 @@
 import UIKit
 
 class TapeTableVC: UITableViewController {
-    private var fullPost = FullPost.getFullPostInfo()
+    private var memes: [Meme] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Memes tape"
         navigationController?.navigationBar.prefersLargeTitles = true
         setupTableView()
+        
+        NetworkManager.shared.fetchData() { memesBase in
+            DispatchQueue.main.async {
+                self.memes = memesBase.memes
+                self.tableView.reloadData()
+            }
+        }
     }
     
     private func setupTableView() {
@@ -23,27 +30,41 @@ class TapeTableVC: UITableViewController {
         tableView.register(nib, forCellReuseIdentifier: TapeViewCell.reuseIdentifier)
         tableView.allowsSelection = false
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fullPost.count
+        return memes.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TapeViewCell.reuseIdentifier, for: indexPath) as! TapeViewCell
-
-        cell.configure(fullPost: fullPost[indexPath.row])
-
+        
+        NetworkManager.shared.getMemeImage(with: memes[indexPath.row].url) { memeImage in
+            cell.memeImageViev.image = memeImage
+        }
+        cell.configure(memeInfo: memes[indexPath.row])
+        
         return cell
     }
-
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let tableViewSides = [tableView.frame.width, tableView.frame.height]
-
+        
         guard let minSide = tableViewSides.min() else {
             return tableView.frame.width/2
         }
         
         return minSide
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == memes.count-1 {
+            NetworkManager.shared.fetchData() { memesBase in
+                DispatchQueue.main.async {
+                    self.memes.append(contentsOf: memesBase.memes)
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
     
 }

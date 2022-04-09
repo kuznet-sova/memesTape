@@ -10,14 +10,12 @@
 		8C0C6F4427E507090042AA4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C6F4327E507090042AA4A /* AppDelegate.swift */; };
 		8C0C6F4D27E5070A0042AA4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C0C6F4C27E5070A0042AA4A /* Assets.xcassets */; };
 		8C0C6F5027E5070A0042AA4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0C6F4E27E5070A0042AA4A /* LaunchScreen.storyboard */; };
-		8C33155F27E7C51300D8E000 /* FullPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C33155E27E7C51300D8E000 /* FullPost.swift */; };
 		8C33156B27EA66D000D8E000 /* TapeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C33156A27EA66D000D8E000 /* TapeViewCell.xib */; };
 		8C4E185627F4908900F557E1 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E185827F4908900F557E1 /* Localizable.stringsdict */; };
 		8CDA4C2F27E7456A009489D0 /* TapeTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDA4C2E27E7456A009489D0 /* TapeTableVC.swift */; };
-		8CDA4C3827E746E0009489D0 /* MemeImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDA4C3727E746E0009489D0 /* MemeImages.swift */; };
-		8CDA4C3A27E74722009489D0 /* MemeAuthors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDA4C3927E74722009489D0 /* MemeAuthors.swift */; };
-		8CDA4C3C27E74753009489D0 /* MemeDescriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDA4C3B27E74753009489D0 /* MemeDescriptions.swift */; };
 		8CDA4C3E27E7495C009489D0 /* TapeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDA4C3D27E7495C009489D0 /* TapeViewCell.swift */; };
+		8CE1FE0427F49DBA00F03CDC /* MemesBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE1FE0327F49DBA00F03CDC /* MemesBase.swift */; };
+		8CE1FE0627F49DCF00F03CDC /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE1FE0527F49DCF00F03CDC /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,16 +23,14 @@
 		8C0C6F4327E507090042AA4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C0C6F4C27E5070A0042AA4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C0C6F5127E5070A0042AA4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8C33155E27E7C51300D8E000 /* FullPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPost.swift; sourceTree = "<group>"; };
 		8C33156A27EA66D000D8E000 /* TapeViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TapeViewCell.xib; sourceTree = "<group>"; };
 		8C4E185527F4905A00F557E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8C4E185727F4908900F557E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		8C4E185927F490BB00F557E1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		8CDA4C2E27E7456A009489D0 /* TapeTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeTableVC.swift; sourceTree = "<group>"; };
-		8CDA4C3727E746E0009489D0 /* MemeImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeImages.swift; sourceTree = "<group>"; };
-		8CDA4C3927E74722009489D0 /* MemeAuthors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeAuthors.swift; sourceTree = "<group>"; };
-		8CDA4C3B27E74753009489D0 /* MemeDescriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeDescriptions.swift; sourceTree = "<group>"; };
 		8CDA4C3D27E7495C009489D0 /* TapeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TapeViewCell.swift; path = memesTape/Views/TapeViewCell.swift; sourceTree = SOURCE_ROOT; };
+		8CE1FE0327F49DBA00F03CDC /* MemesBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemesBase.swift; sourceTree = "<group>"; };
+		8CE1FE0527F49DCF00F03CDC /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,10 +93,7 @@
 		8CDA4C3127E745A8009489D0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8C33155E27E7C51300D8E000 /* FullPost.swift */,
-				8CDA4C3727E746E0009489D0 /* MemeImages.swift */,
-				8CDA4C3927E74722009489D0 /* MemeAuthors.swift */,
-				8CDA4C3B27E74753009489D0 /* MemeDescriptions.swift */,
+				8CE1FE0327F49DBA00F03CDC /* MemesBase.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -117,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				8C0C6F4327E507090042AA4A /* AppDelegate.swift */,
+				8CE1FE0527F49DCF00F03CDC /* NetworkManager.swift */,
 				8C4E185827F4908900F557E1 /* Localizable.stringsdict */,
 				8C0C6F5127E5070A0042AA4A /* Info.plist */,
 			);
@@ -203,11 +197,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CDA4C3827E746E0009489D0 /* MemeImages.swift in Sources */,
-				8CDA4C3A27E74722009489D0 /* MemeAuthors.swift in Sources */,
+				8CE1FE0427F49DBA00F03CDC /* MemesBase.swift in Sources */,
 				8CDA4C2F27E7456A009489D0 /* TapeTableVC.swift in Sources */,
-				8C33155F27E7C51300D8E000 /* FullPost.swift in Sources */,
-				8CDA4C3C27E74753009489D0 /* MemeDescriptions.swift in Sources */,
+				8CE1FE0627F49DCF00F03CDC /* NetworkManager.swift in Sources */,
 				8C0C6F4427E507090042AA4A /* AppDelegate.swift in Sources */,
 				8CDA4C3E27E7495C009489D0 /* TapeViewCell.swift in Sources */,
 			);
