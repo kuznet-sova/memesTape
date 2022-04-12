@@ -8,8 +8,10 @@
 import UIKit
 
 class MessagesTableVC: UITableViewController {
+//    var messagesHistory: [Int : [Message]] = [:]
     var messagesInfo: [Message] = []
     var commentAuthor = ""
+    var cellIndex = 0
     
     override var inputAccessoryView: UIView? {
         return containerView
@@ -58,9 +60,19 @@ extension MessagesTableVC: AddCommentViewDelegate {
     func didSubmit(comment: String) {
         let newComment = Message(author: commentAuthor, description: comment)
         messagesInfo.append(newComment)
+//        messagesHistory.updateValue(messagesInfo, forKey: cellIndex)
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
         self.containerView.clearCommentTextField()
+        saveHistory()
+    }
+}
+
+extension MessagesTableVC: TapeTableVCDelegate {
+    func saveHistory() {
+        let tapeTableVC = TapeTableVC()
+        tapeTableVC.tapeTableVCDelegate = self
+        tapeTableVC.messagesHistory.updateValue(messagesInfo, forKey: cellIndex)
     }
 }

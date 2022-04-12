@@ -7,9 +7,17 @@
 
 import UIKit
 
+protocol TapeTableVCDelegate {
+    func saveHistory()
+}
+
 class TapeTableVC: UITableViewController {
     private var memes: [Meme] = []
     private let refreshLabel = UILabel()
+    var messagesHistory: [Int : [Message]] = [:]
+    var cellIndex = 0
+    
+    var tapeTableVCDelegate: TapeTableVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +62,7 @@ class TapeTableVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TapeViewCell.reuseIdentifier, for: indexPath) as! TapeViewCell
         
+        cellIndex = indexPath.row
         cell.spinnerView?.startAnimating()
         NetworkManager.shared.getMemeImage(with: memes[indexPath.row].url) { memeImage in
             cell.spinnerView?.stopAnimating()
