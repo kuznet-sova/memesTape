@@ -7,17 +7,11 @@
 
 import UIKit
 
-protocol TapeTableVCDelegate {
-    func saveHistory()
-}
-
 class TapeTableVC: UITableViewController {
     private var memes: [Meme] = []
     private let refreshLabel = UILabel()
     var messagesHistory: [Int : [Message]] = [:]
     var cellIndex = 0
-    
-    var tapeTableVCDelegate: TapeTableVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,7 +111,19 @@ class TapeTableVC: UITableViewController {
 extension TapeTableVC: CellDelegate {
     func openMessagesVC(messageInfo: Message) {
         let messagesTableVC: MessagesTableVC = MessagesTableVC()
-        messagesTableVC.messagesInfo.append(messageInfo)
+        messagesTableVC.messagesTableVCDelegate = self
+//        if let history = messagesHistory[cellIndex] {
+//            messagesTableVC.messagesInfo = history
+//        } else {
+            messagesTableVC.messagesInfo.append(messageInfo)
+//        }
         navigationController?.pushViewController(messagesTableVC, animated: true)
+    }
+}
+
+extension TapeTableVC: MessagesTableVCDelegate {
+    func saveHistory(messages: [Message], index: Int) {
+        messagesHistory.updateValue(messages, forKey: index)
+        tableView.reloadData()
     }
 }
