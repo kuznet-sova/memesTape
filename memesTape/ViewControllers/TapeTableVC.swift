@@ -112,7 +112,8 @@ extension TapeTableVC: CellDelegate {
     func openMessagesVC(messageInfo: Message, index: Int) {
         let messagesTableVC: MessagesTableVC = MessagesTableVC()
         messagesTableVC.messagesTableVCDelegate = self
-        if let history = messagesHistory[cellIndex] {
+        if let history = messagesHistory[cellIndex],
+            history[0].description == messageInfo.description {
             messagesTableVC.messagesInfo = history
         } else {
             messagesTableVC.messagesInfo.append(messageInfo)
