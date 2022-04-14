@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CellDelegate: AnyObject {
-    func openMessagesVC(messageInfo: Message)
+    func openMessagesVC(messageInfo: Message, index: Int)
 }
 
 class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
@@ -28,6 +28,7 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     var spinnerView: UIActivityIndicatorView?
     weak var cellDelegate: CellDelegate?
     var messageInfo = Message(author: "No name", description: "...")
+    var cellIndex = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -113,7 +114,7 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     }
     
     @IBAction private func messageButtonTap(_ sender: UIButton) {
-        cellDelegate?.openMessagesVC(messageInfo: messageInfo)
+        cellDelegate?.openMessagesVC(messageInfo: messageInfo, index: cellIndex)
     }
     
 }

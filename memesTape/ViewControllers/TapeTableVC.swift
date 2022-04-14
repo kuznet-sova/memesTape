@@ -56,7 +56,7 @@ class TapeTableVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TapeViewCell.reuseIdentifier, for: indexPath) as! TapeViewCell
         
-        cellIndex = indexPath.row
+        cell.cellIndex = indexPath.row
         cell.spinnerView?.startAnimating()
         NetworkManager.shared.getMemeImage(with: memes[indexPath.row].url) { memeImage in
             cell.spinnerView?.stopAnimating()
@@ -109,21 +109,21 @@ class TapeTableVC: UITableViewController {
 }
 
 extension TapeTableVC: CellDelegate {
-    func openMessagesVC(messageInfo: Message) {
+    func openMessagesVC(messageInfo: Message, index: Int) {
         let messagesTableVC: MessagesTableVC = MessagesTableVC()
         messagesTableVC.messagesTableVCDelegate = self
-//        if let history = messagesHistory[cellIndex] {
-//            messagesTableVC.messagesInfo = history
-//        } else {
+        if let history = messagesHistory[cellIndex] {
+            messagesTableVC.messagesInfo = history
+        } else {
             messagesTableVC.messagesInfo.append(messageInfo)
-//        }
+        }
         navigationController?.pushViewController(messagesTableVC, animated: true)
     }
 }
 
 extension TapeTableVC: MessagesTableVCDelegate {
-    func saveHistory(messages: [Message], index: Int) {
-        messagesHistory.updateValue(messages, forKey: index)
+    func saveHistory(messages: [Message]) {
+        messagesHistory.updateValue(messages, forKey: cellIndex)
         tableView.reloadData()
     }
 }
