@@ -11,6 +11,8 @@ class TapeTableVC: UITableViewController {
     private var memes: [Meme] = []
     private let refreshLabel = UILabel()
     var messagesHistory: [Int : [Message]] = [:]
+    var likesHistory: [Int : Int] = [:]
+    var likeTapHistory: [Int : Bool] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +58,12 @@ class TapeTableVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: TapeViewCell.reuseIdentifier, for: indexPath) as! TapeViewCell
         
         cell.cellIndex = indexPath.row
+        if let likes = likesHistory[indexPath.row] {
+            cell.likesCount = likes
+        }
+        if let likeTap = likeTapHistory[indexPath.row] {
+            cell.isChosen = likeTap
+        }
         cell.spinnerView?.startAnimating()
         NetworkManager.shared.getMemeImage(with: memes[indexPath.row].url) { memeImage in
             cell.spinnerView?.stopAnimating()
@@ -95,9 +103,22 @@ class TapeTableVC: UITableViewController {
         }
         
         NetworkManager.shared.fetchData(postCount: 1) { memesBase in
-            var newKeysDictionary: [Int : [Message]] = [:]
+            var newMessagesDictionary: [Int : [Message]] = [:]
+            var newLikesDictionary: [Int : Int] = [:]
+            var newLikeTapDictionary: [Int : Bool] = [:]
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                for key in 0...self.likesHistory.keys.count {
+                    if let oldValue = self.likesHistory[key] {
+                        newLikesDictionary.updateValue(oldValue, forKey: key + 1)
+                    }
+                }
+                for key in 0...self.likeTapHistory.keys.count {
+                    if let oldValue = self.likeTapHistory[key] {
+                        newLikeTapDictionary.updateValue(oldValue, forKey: key + 1)
+                    }
+                }
+                self.likesHistory = newLikesDictionary
                 self.memes = memesBase.memes
                 self.memes.append(contentsOf: historyMemesList)
                 self.tableView.reloadData()
@@ -106,10 +127,10 @@ class TapeTableVC: UITableViewController {
                 
                 for key in 0...self.messagesHistory.keys.count {
                     if let oldValue = self.messagesHistory[key] {
-                        newKeysDictionary.updateValue(oldValue, forKey: key + 1)
+                        newMessagesDictionary.updateValue(oldValue, forKey: key + 1)
                     }
                 }
-                self.messagesHistory = newKeysDictionary
+                self.messagesHistory = newMessagesDictionary
             }
         }
     }
@@ -117,7 +138,10 @@ class TapeTableVC: UITableViewController {
 }
 
 extension TapeTableVC: CellDelegate {
-    func openMessagesVC(messageInfo: Message, index: Int) {
+    func openMessagesVC(messageInfo: Message, index: Int, likes: Int, likeTap: Bool) {
+        likesHistory.updateValue(likes, forKey: index)
+        likeTapHistory.updateValue(likeTap, forKey: index)
+        
         let messagesTableVC: MessagesTableVC = MessagesTableVC()
         messagesTableVC.messagesTableVCDelegate = self
         messagesTableVC.cellIndex = index
