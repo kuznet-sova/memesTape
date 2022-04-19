@@ -9,14 +9,14 @@ import UIKit
 
 class TapeTableVC: UITableViewController {
     private var memes: [Meme] = []
-    private let refreshLabel = UILabel()
+    var messagesHistory: [Int : [Message]] = [:]
+    var likesHistory: [Int : Int] = [:]
+    var likeTapHistory: [Int : Bool] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Memes tape"
         setupTableView()
-        setRefreshLabel()
-        refreshLabel.isHidden = true
         
         NetworkManager.shared.fetchData(postCount: 5) { memesBase in
             DispatchQueue.main.async {
@@ -36,28 +36,19 @@ class TapeTableVC: UITableViewController {
         tableView.allowsSelection = false
     }
     
-    private func setRefreshLabel() {
-        refreshLabel.textColor = .gray
-        refreshLabel.textAlignment = .left
-        refreshLabel.text = "Loading..."
-        //        Хотела добавить лейбл над навбаром, но кроме как подбор значений не нашла способ.
-        //        Подскажите есть ли какой вариант указать расположение лейбла над навигешн контроллером?
-        refreshLabel.frame = CGRect(x: 20, y: -100, width: 80, height: 30)
-        
-        tableView.addSubview(refreshLabel)
-    }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memes.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TapeViewCell.reuseIdentifier, for: indexPath) as! TapeViewCell
+        cell.cellIndex = indexPath.row
         
-        cell.spinnerView?.startAnimating()
-        NetworkManager.shared.getMemeImage(with: memes[indexPath.row].url) { memeImage in
-            cell.spinnerView?.stopAnimating()
-            cell.memeImageViev.image = memeImage
+        if let likes = likesHistory[indexPath.row] {
+            cell.likesCount = likes
+        }
+        if let likeTap = likeTapHistory[indexPath.row] {
+            cell.isChosen = likeTap
         }
         cell.configure(memeInfo: memes[indexPath.row])
         cell.cellDelegate = self
@@ -88,17 +79,35 @@ class TapeTableVC: UITableViewController {
     
     @objc func callPullToRefresh(){
         let historyMemesList = memes
-        if tableView.refreshControl?.isRefreshing == true{
-            self.refreshLabel.isHidden = false
-        }
         
         NetworkManager.shared.fetchData(postCount: 1) { memesBase in
+            var newMessagesDictionary: [Int : [Message]] = [:]
+            var newLikesDictionary: [Int : Int] = [:]
+            var newLikeTapDictionary: [Int : Bool] = [:]
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                for key in 0...self.likesHistory.keys.count {
+                    if let oldValue = self.likesHistory[key] {
+                        newLikesDictionary.updateValue(oldValue, forKey: key + 1)
+                    }
+                }
+                for key in 0...self.likeTapHistory.keys.count {
+                    if let oldValue = self.likeTapHistory[key] {
+                        newLikeTapDictionary.updateValue(oldValue, forKey: key + 1)
+                    }
+                }
+                self.likesHistory = newLikesDictionary
                 self.memes = memesBase.memes
                 self.memes.append(contentsOf: historyMemesList)
                 self.tableView.reloadData()
                 self.tableView.refreshControl?.endRefreshing()
-                self.refreshLabel.isHidden = true
+                
+                for key in 0...self.messagesHistory.keys.count {
+                    if let oldValue = self.messagesHistory[key] {
+                        newMessagesDictionary.updateValue(oldValue, forKey: key + 1)
+                    }
+                }
+                self.messagesHistory = newMessagesDictionary
             }
         }
     }
@@ -106,9 +115,26 @@ class TapeTableVC: UITableViewController {
 }
 
 extension TapeTableVC: CellDelegate {
-    func openMessagesVC(messageInfo: Message) {
+    func openMessagesVC(messageInfo: Message, index: Int, likes: Int, likeTap: Bool) {
+        likesHistory.updateValue(likes, forKey: index)
+        likeTapHistory.updateValue(likeTap, forKey: index)
+        
         let messagesTableVC: MessagesTableVC = MessagesTableVC()
-        messagesTableVC.messagesInfo.append(messageInfo)
+        messagesTableVC.messagesTableVCDelegate = self
+        messagesTableVC.cellIndex = index
+        
+        if let history = messagesHistory[index] {
+            messagesTableVC.messagesInfo = history
+        } else {
+            messagesTableVC.messagesInfo.append(messageInfo)
+        }
         navigationController?.pushViewController(messagesTableVC, animated: true)
+    }
+}
+
+extension TapeTableVC: MessagesTableVCDelegate {
+    func saveHistory(messages: [Message], index: Int) {
+        messagesHistory.updateValue(messages, forKey: index)
+        tableView.reloadData()
     }
 }

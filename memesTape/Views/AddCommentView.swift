@@ -36,10 +36,13 @@ class AddCommentView: UIView {
     }()
     
     func clearCommentTextField() {
-        commentTextView.text = nil
-        commentTextView.showPlaceHolderLabel()
         sendButton.isEnabled = false
         sendButton.setTitleColor(.systemGray, for: .normal)
+    }
+    
+    private func textViewDidEndEditing(_ textView: UITextView) {
+        commentTextView.text = nil
+        commentTextView.showPlaceHolderLabel()
     }
     
     private func sharedInit() {
@@ -71,17 +74,15 @@ class AddCommentView: UIView {
         guard let commentText = commentTextView.text else { return }
         commentTextView.resignFirstResponder()
         delegate?.didSubmit(comment: commentText)
+        textViewDidEndEditing(commentTextView)
     }
     
     @objc private func handleTextChange() {
         guard let text = commentTextView.text else { return }
-        if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            sendButton.isEnabled = false
-            sendButton.setTitleColor(.systemGray, for: .normal)
-        } else {
-            sendButton.isEnabled = true
-            sendButton.setTitleColor(.systemBlue, for: .normal)
-        }
+        
+        let isEmpty = text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        sendButton.isEnabled = !isEmpty
+        sendButton.setTitleColor(isEmpty ? .systemGray : .systemBlue, for: .normal)
     }
     
 }

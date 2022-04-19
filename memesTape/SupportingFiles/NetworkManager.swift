@@ -46,9 +46,9 @@ class NetworkManager {
                 guard let memeImageUrl = URL(string: stringMemeImageUrl),
                       let memeImageData = try? Data(contentsOf: memeImageUrl),
                       let memeImage = UIImage(data: memeImageData) else { return }
-                self.cashedImages.updateValue(memeImage, forKey: stringMemeImageUrl)
                 
                 DispatchQueue.main.async {
+                    self.cashedImages.updateValue(memeImage, forKey: stringMemeImageUrl)
                     complition(memeImage)
                 }
             }
@@ -58,7 +58,6 @@ class NetworkManager {
 }
 
 extension URL {
-    //    Пока просто вынесла ссылку сюда, в пр с 3 дз уже вносила изменения в работу с url, докрутить хочу уже в следующей ветке
     static var memesUrl: String {
         String("https://meme-api.herokuapp.com/gimme/")
     }

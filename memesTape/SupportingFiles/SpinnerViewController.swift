@@ -7,8 +7,8 @@
 
 import UIKit
 
-class SpinnerViewController: UIViewController {
-    var spinner = UIActivityIndicatorView(style: .large)
+class SpinnerViewController {
+    private var spinner = UIActivityIndicatorView(style: .large)
     
     func showSpinner(in view: UIView) -> UIActivityIndicatorView {
         spinner.translatesAutoresizingMaskIntoConstraints = false
