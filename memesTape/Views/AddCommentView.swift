@@ -79,13 +79,10 @@ class AddCommentView: UIView {
     
     @objc private func handleTextChange() {
         guard let text = commentTextView.text else { return }
-        if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            sendButton.isEnabled = false
-            sendButton.setTitleColor(.systemGray, for: .normal)
-        } else {
-            sendButton.isEnabled = true
-            sendButton.setTitleColor(.systemBlue, for: .normal)
-        }
+        
+        let isEmpty = text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        sendButton.isEnabled = !isEmpty
+        sendButton.setTitleColor(isEmpty ? .systemGray : .systemBlue, for: .normal)
     }
     
 }
