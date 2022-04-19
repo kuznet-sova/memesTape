@@ -24,7 +24,7 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     var isChosen = false
     //    Не успеваю нарисовать картинку с UIBezierPath, пока просто готовое изображение
     private let likeImageView = UIImageView(image: UIImage(named: "heart50.png"))
-    var spinnerView: UIActivityIndicatorView?
+    private var spinnerView: UIActivityIndicatorView?
     weak var cellDelegate: CellDelegate?
     var messageInfo = Message(author: "No name", description: "...")
     var likesCount = 0
@@ -44,10 +44,18 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     }
     
     func configure(memeInfo: Meme) {
+        spinnerView?.startAnimating()
+        
+        NetworkManager.shared.getMemeImage(with: memeInfo.url) { memeImage in
+            self.spinnerView?.stopAnimating()
+            self.memeImageViev.image = memeImage
+        }
+        
         if likesCount == 0 {
             likesCount = memeInfo.ups
             likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         }
+        
         memeAuthorLabel.text = memeInfo.author
         memeDescriptionLebel.text = memeInfo.title
         likesCounterLebel.text = likesCountUniversal(count: likesCount)

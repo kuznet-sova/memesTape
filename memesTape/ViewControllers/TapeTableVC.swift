@@ -42,18 +42,13 @@ class TapeTableVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TapeViewCell.reuseIdentifier, for: indexPath) as! TapeViewCell
-        
         cell.cellIndex = indexPath.row
+        
         if let likes = likesHistory[indexPath.row] {
             cell.likesCount = likes
         }
         if let likeTap = likeTapHistory[indexPath.row] {
             cell.isChosen = likeTap
-        }
-        cell.spinnerView?.startAnimating()
-        NetworkManager.shared.getMemeImage(with: memes[indexPath.row].url) { memeImage in
-            cell.spinnerView?.stopAnimating()
-            cell.memeImageViev.image = memeImage
         }
         cell.configure(memeInfo: memes[indexPath.row])
         cell.cellDelegate = self
