@@ -11,7 +11,6 @@ class TapeTableVC: UITableViewController {
     private var memes: [Meme] = []
     private let refreshLabel = UILabel()
     var messagesHistory: [Int : [Message]] = [:]
-    var cellIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,12 +95,21 @@ class TapeTableVC: UITableViewController {
         }
         
         NetworkManager.shared.fetchData(postCount: 1) { memesBase in
+            var newKeysDictionary: [Int : [Message]] = [:]
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.memes = memesBase.memes
                 self.memes.append(contentsOf: historyMemesList)
                 self.tableView.reloadData()
                 self.tableView.refreshControl?.endRefreshing()
                 self.refreshLabel.isHidden = true
+                
+                for key in 0...self.messagesHistory.keys.count {
+                    if let oldValue = self.messagesHistory[key] {
+                        newKeysDictionary.updateValue(oldValue, forKey: key + 1)
+                    }
+                }
+                self.messagesHistory = newKeysDictionary
             }
         }
     }
@@ -112,8 +120,9 @@ extension TapeTableVC: CellDelegate {
     func openMessagesVC(messageInfo: Message, index: Int) {
         let messagesTableVC: MessagesTableVC = MessagesTableVC()
         messagesTableVC.messagesTableVCDelegate = self
-        if let history = messagesHistory[cellIndex],
-            history[0].description == messageInfo.description {
+        messagesTableVC.cellIndex = index
+        
+        if let history = messagesHistory[index] {
             messagesTableVC.messagesInfo = history
         } else {
             messagesTableVC.messagesInfo.append(messageInfo)
@@ -123,8 +132,8 @@ extension TapeTableVC: CellDelegate {
 }
 
 extension TapeTableVC: MessagesTableVCDelegate {
-    func saveHistory(messages: [Message]) {
-        messagesHistory.updateValue(messages, forKey: cellIndex)
+    func saveHistory(messages: [Message], index: Int) {
+        messagesHistory.updateValue(messages, forKey: index)
         tableView.reloadData()
     }
 }

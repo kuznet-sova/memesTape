@@ -8,13 +8,14 @@
 import UIKit
 
 protocol MessagesTableVCDelegate: AnyObject {
-    func saveHistory(messages: [Message])
+    func saveHistory(messages: [Message], index: Int)
 }
 
 class MessagesTableVC: UITableViewController {
     weak var messagesTableVCDelegate: MessagesTableVCDelegate?
     var messagesInfo: [Message] = []
     var commentAuthor = ""
+    var cellIndex = 0
     
     override var inputAccessoryView: UIView? {
         return containerView
@@ -67,6 +68,6 @@ extension MessagesTableVC: AddCommentViewDelegate {
             self.tableView.reloadData()
         }
         self.containerView.clearCommentTextField()
-        messagesTableVCDelegate?.saveHistory(messages: messagesInfo)
+        messagesTableVCDelegate?.saveHistory(messages: messagesInfo, index: cellIndex)
     }
 }
