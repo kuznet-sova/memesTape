@@ -36,10 +36,13 @@ class AddCommentView: UIView {
     }()
     
     func clearCommentTextField() {
-        commentTextView.text = nil
-        commentTextView.showPlaceHolderLabel()
         sendButton.isEnabled = false
         sendButton.setTitleColor(.systemGray, for: .normal)
+    }
+    
+    private func textViewDidEndEditing(_ textView: UITextView) {
+        commentTextView.text = nil
+        commentTextView.showPlaceHolderLabel()
     }
     
     private func sharedInit() {
@@ -71,6 +74,7 @@ class AddCommentView: UIView {
         guard let commentText = commentTextView.text else { return }
         commentTextView.resignFirstResponder()
         delegate?.didSubmit(comment: commentText)
+        textViewDidEndEditing(commentTextView)
     }
     
     @objc private func handleTextChange() {
