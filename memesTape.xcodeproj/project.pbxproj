@@ -7,11 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C09B92D27FB2D870014ED96 /* AddCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09B92C27FB2D870014ED96 /* AddCommentView.swift */; };
+		8C09B92F27FB4A050014ED96 /* CommentInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09B92E27FB4A050014ED96 /* CommentInputTextView.swift */; };
 		8C0C6F4427E507090042AA4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C6F4327E507090042AA4A /* AppDelegate.swift */; };
 		8C0C6F4D27E5070A0042AA4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C0C6F4C27E5070A0042AA4A /* Assets.xcassets */; };
 		8C0C6F5027E5070A0042AA4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0C6F4E27E5070A0042AA4A /* LaunchScreen.storyboard */; };
 		8C33156B27EA66D000D8E000 /* TapeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C33156A27EA66D000D8E000 /* TapeViewCell.xib */; };
+		8C3797D4280EE7D7002E5898 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3797D3280EE7D7002E5898 /* Extensions.swift */; };
 		8C4E185627F4908900F557E1 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E185827F4908900F557E1 /* Localizable.stringsdict */; };
+		8C660A3327F793250027B338 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C660A3227F793250027B338 /* SpinnerViewController.swift */; };
+		8CABD48C27F9DDC300A974F8 /* MessagesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CABD48B27F9DDC300A974F8 /* MessagesViewCell.swift */; };
+		8CABD48E27F9E17C00A974F8 /* MessagesViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CABD48D27F9E17C00A974F8 /* MessagesViewCell.xib */; };
+		8CD532EF27FA14B500146573 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD532EE27FA14B500146573 /* Message.swift */; };
+		8CD532F127FA150200146573 /* MessagesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD532F027FA150200146573 /* MessagesTableVC.swift */; };
 		8CDA4C2F27E7456A009489D0 /* TapeTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDA4C2E27E7456A009489D0 /* TapeTableVC.swift */; };
 		8CDA4C3E27E7495C009489D0 /* TapeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDA4C3D27E7495C009489D0 /* TapeViewCell.swift */; };
 		8CE1FE0427F49DBA00F03CDC /* MemesBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE1FE0327F49DBA00F03CDC /* MemesBase.swift */; };
@@ -19,14 +27,22 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8C09B92C27FB2D870014ED96 /* AddCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentView.swift; sourceTree = "<group>"; };
+		8C09B92E27FB4A050014ED96 /* CommentInputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentInputTextView.swift; sourceTree = "<group>"; };
 		8C0C6F4027E507090042AA4A /* memesTape.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = memesTape.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C0C6F4327E507090042AA4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C0C6F4C27E5070A0042AA4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C0C6F5127E5070A0042AA4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C33156A27EA66D000D8E000 /* TapeViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TapeViewCell.xib; sourceTree = "<group>"; };
+		8C3797D3280EE7D7002E5898 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8C4E185527F4905A00F557E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8C4E185727F4908900F557E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		8C4E185927F490BB00F557E1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		8C660A3227F793250027B338 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
+		8CABD48B27F9DDC300A974F8 /* MessagesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewCell.swift; sourceTree = "<group>"; };
+		8CABD48D27F9E17C00A974F8 /* MessagesViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessagesViewCell.xib; sourceTree = "<group>"; };
+		8CD532EE27FA14B500146573 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		8CD532F027FA150200146573 /* MessagesTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableVC.swift; sourceTree = "<group>"; };
 		8CDA4C2E27E7456A009489D0 /* TapeTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeTableVC.swift; sourceTree = "<group>"; };
 		8CDA4C3D27E7495C009489D0 /* TapeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TapeViewCell.swift; path = memesTape/Views/TapeViewCell.swift; sourceTree = SOURCE_ROOT; };
 		8CE1FE0327F49DBA00F03CDC /* MemesBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemesBase.swift; sourceTree = "<group>"; };
@@ -78,6 +94,10 @@
 			children = (
 				8CDA4C3D27E7495C009489D0 /* TapeViewCell.swift */,
 				8C33156A27EA66D000D8E000 /* TapeViewCell.xib */,
+				8CABD48B27F9DDC300A974F8 /* MessagesViewCell.swift */,
+				8CABD48D27F9E17C00A974F8 /* MessagesViewCell.xib */,
+				8C09B92C27FB2D870014ED96 /* AddCommentView.swift */,
+				8C09B92E27FB4A050014ED96 /* CommentInputTextView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -86,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				8CDA4C2E27E7456A009489D0 /* TapeTableVC.swift */,
+				8CD532F027FA150200146573 /* MessagesTableVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -94,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				8CE1FE0327F49DBA00F03CDC /* MemesBase.swift */,
+				8CD532EE27FA14B500146573 /* Message.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -111,6 +133,8 @@
 			children = (
 				8C0C6F4327E507090042AA4A /* AppDelegate.swift */,
 				8CE1FE0527F49DCF00F03CDC /* NetworkManager.swift */,
+				8C3797D3280EE7D7002E5898 /* Extensions.swift */,
+				8C660A3227F793250027B338 /* SpinnerViewController.swift */,
 				8C4E185827F4908900F557E1 /* Localizable.stringsdict */,
 				8C0C6F5127E5070A0042AA4A /* Info.plist */,
 			);
@@ -187,6 +211,7 @@
 				8C4E185627F4908900F557E1 /* Localizable.stringsdict in Resources */,
 				8C33156B27EA66D000D8E000 /* TapeViewCell.xib in Resources */,
 				8C0C6F4D27E5070A0042AA4A /* Assets.xcassets in Resources */,
+				8CABD48E27F9E17C00A974F8 /* MessagesViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,8 +224,15 @@
 			files = (
 				8CE1FE0427F49DBA00F03CDC /* MemesBase.swift in Sources */,
 				8CDA4C2F27E7456A009489D0 /* TapeTableVC.swift in Sources */,
+				8C09B92D27FB2D870014ED96 /* AddCommentView.swift in Sources */,
+				8CD532EF27FA14B500146573 /* Message.swift in Sources */,
+				8C09B92F27FB4A050014ED96 /* CommentInputTextView.swift in Sources */,
+				8CD532F127FA150200146573 /* MessagesTableVC.swift in Sources */,
 				8CE1FE0627F49DCF00F03CDC /* NetworkManager.swift in Sources */,
+				8C3797D4280EE7D7002E5898 /* Extensions.swift in Sources */,
+				8CABD48C27F9DDC300A974F8 /* MessagesViewCell.swift in Sources */,
 				8C0C6F4427E507090042AA4A /* AppDelegate.swift in Sources */,
+				8C660A3327F793250027B338 /* SpinnerViewController.swift in Sources */,
 				8CDA4C3E27E7495C009489D0 /* TapeViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -357,6 +389,7 @@
 				DEVELOPMENT_TEAM = 89DNN95PU8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = memesTape/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Memta;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -387,6 +420,7 @@
 				DEVELOPMENT_TEAM = 89DNN95PU8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = memesTape/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Memta;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

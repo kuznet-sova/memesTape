@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol CellDelegate: AnyObject {
+    func openMessagesVC(messageInfo: Message, index: Int, likes: Int, likeTap: Bool)
+}
+
 class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     
     @IBOutlet var scrollViev: UIScrollView!
@@ -17,10 +21,14 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     @IBOutlet var memeDescriptionLebel: UILabel!
     
     static let reuseIdentifier = String(describing: TapeViewCell.self)
-    private var likesCount = 0
-    private var isChosen = false
+    var isChosen = false
     //    Не успеваю нарисовать картинку с UIBezierPath, пока просто готовое изображение
     private let likeImageView = UIImageView(image: UIImage(named: "heart50.png"))
+    private var spinnerView: UIActivityIndicatorView?
+    weak var cellDelegate: CellDelegate?
+    var messageInfo = Message(author: "No name", description: "...")
+    var likesCount = 0
+    var cellIndex = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,15 +40,27 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
         scrollViev.minimumZoomScale = 1.0
         scrollViev.maximumZoomScale = 2.0
         likeImageView.translatesAutoresizingMaskIntoConstraints = false
+        spinnerView = SpinnerViewController().showSpinner(in: memeImageViev)
     }
     
     func configure(memeInfo: Meme) {
-        likesCount = memeInfo.ups
+        spinnerView?.startAnimating()
+        
+        NetworkManager.shared.getMemeImage(with: memeInfo.url) { memeImage in
+            self.spinnerView?.stopAnimating()
+            self.memeImageViev.image = memeImage
+        }
+        
+        if likesCount == 0 {
+            likesCount = memeInfo.ups
+            likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+        
         memeAuthorLabel.text = memeInfo.author
         memeDescriptionLebel.text = memeInfo.title
         likesCounterLebel.text = likesCountUniversal(count: likesCount)
-        likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         selectionStyle = .none
+        messageInfo = Message(author: "🥷 @\(memeInfo.author)", description: memeInfo.title)
     }
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
@@ -92,15 +112,19 @@ class TapeViewCell: UITableViewCell, UIScrollViewDelegate {
     }
     
     override func prepareForReuse() {
-        memeImageViev.image = UIImage(named: "defaultImage.jpg")
+        memeImageViev.image = nil
     }
     
     @objc func doubleTapFunc() {
         getFullLikesInfo(doubleTap: true)
     }
     
-    @IBAction private func likeButtonTap(_ sender: Bool) {
+    @IBAction private func likeButtonTap(_ sender: UIButton) {
         getFullLikesInfo(doubleTap: false)
+    }
+    
+    @IBAction private func messageButtonTap(_ sender: UIButton) {
+        cellDelegate?.openMessagesVC(messageInfo: messageInfo, index: cellIndex, likes: likesCount, likeTap: isChosen)
     }
     
 }

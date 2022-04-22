@@ -9,10 +9,10 @@ import UIKit
 
 class NetworkManager {
     static let shared = NetworkManager()
-    var cashedImages: [String : UIImage] = [:]
+    private var cashedImages: [String : UIImage] = [:]
     
-    func fetchData(with complition: @escaping (MemesBase) -> Void) {
-        let memesUrl = URL.memesUrl
+    func fetchData(postCount: Int, with complition: @escaping (MemesBase) -> Void) {
+        let memesUrl = URL.memesUrl + String(postCount)
         
         guard let url = URL(string: memesUrl) else { return }
         
@@ -34,19 +34,23 @@ class NetworkManager {
         let memeImageUrl = url
         guard let stringMemeImageUrl = memeImageUrl else { return }
         
-        if let cashedImage = self.cashedImages[stringMemeImageUrl] {
-            complition(cashedImage)
-            return
-        }
-        
-        DispatchQueue.global(qos: .background).async {
-            guard let memeImageUrl = URL(string: stringMemeImageUrl),
-                  let memeImageData = try? Data(contentsOf: memeImageUrl),
-                  let memeImage = UIImage(data: memeImageData) else { return }
+        if memeImageUrl == nil {
+            complition(UIImage(named: "defaultImage.jpg")!)
+        } else {
+            if let cashedImage = self.cashedImages[stringMemeImageUrl] {
+                complition(cashedImage)
+                return
+            }
             
-            DispatchQueue.main.async {
-                self.cashedImages.updateValue(memeImage, forKey: stringMemeImageUrl)
-                complition(memeImage)
+            DispatchQueue.global(qos: .background).async {
+                guard let memeImageUrl = URL(string: stringMemeImageUrl),
+                      let memeImageData = try? Data(contentsOf: memeImageUrl),
+                      let memeImage = UIImage(data: memeImageData) else { return }
+                
+                DispatchQueue.main.async {
+                    self.cashedImages.updateValue(memeImage, forKey: stringMemeImageUrl)
+                    complition(memeImage)
+                }
             }
         }
     }
@@ -54,8 +58,7 @@ class NetworkManager {
 }
 
 extension URL {
-    //    Пока просто вынесла ссылку сюда, в пр с 3 дз уже вносила изменения в работу с url, докрутить хочу уже в следующей ветке
     static var memesUrl: String {
-        String("https://meme-api.herokuapp.com/gimme/5")
+        String("https://meme-api.herokuapp.com/gimme/")
     }
 }
