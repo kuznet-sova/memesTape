@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 extension UIView {
     func anchor(top: NSLayoutYAxisAnchor?,
@@ -38,4 +39,19 @@ extension UIView {
             heightAnchor.constraint(equalToConstant: height).isActive = true
         }
     }
+}
+
+extension Auth {
+    func createUser(withEmail email: String, username: String, password: String, completion: @escaping (Error?) -> ()) {
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            // ...
+        }
+    }
+    
+    func signIn(withEmail email: String, password: String, completion: @escaping (Error?) -> ()) {
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+          // ...
+        }
+    }
+    
 }

@@ -15,13 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         setupWindow()
-        FirebaseApp.configure()
         return true
     }
     
     func setupWindow() {
+        FirebaseApp.configure()
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = UINavigationController.init(rootViewController: TapeTableVC())
+//        window?.rootViewController = UINavigationController.init(rootViewController: TapeTableVC())
+        window?.rootViewController = UINavigationController.init(rootViewController: MainVC())
         window?.makeKeyAndVisible()
     }
     
