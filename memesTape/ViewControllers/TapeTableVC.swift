@@ -6,12 +6,16 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
+import FirebaseStorage
 
 class TapeTableVC: UITableViewController {
     private var memes: [Meme] = []
     var messagesHistory: [Int : [Message]] = [:]
     var likesHistory: [Int : Int] = [:]
     var likeTapHistory: [Int : Bool] = [:]
+//    let signOutButton = UIBarButtonItem(title: "Sign out", style: .plain, target: self, action: #selector(signOut))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +31,8 @@ class TapeTableVC: UITableViewController {
         
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl?.addTarget(self, action: #selector(callPullToRefresh), for: .valueChanged)
+        
+//        self.navigationItem.rightBarButtonItem  = signOutButton
     }
     
     private func setupTableView() {
@@ -111,6 +117,14 @@ class TapeTableVC: UITableViewController {
             }
         }
     }
+    
+//    @objc func signOut() {
+//        do {
+//            try Auth.auth().signOut()
+//        } catch {
+//            return
+//        }
+//    }
     
 }
 

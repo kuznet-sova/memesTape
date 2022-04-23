@@ -16,7 +16,7 @@ class MainVC: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         delegate = self
         
-        signOut()
+//        signOut()
         if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
                 let loginVC = LoginVC()
@@ -25,18 +25,14 @@ class MainVC: UITabBarController, UITabBarControllerDelegate {
             }
             return
         }
-        
-        AppDelegate().window?.rootViewController = UINavigationController.init(rootViewController: TapeTableVC())
-//        let signOutButton = UIBarButtonItem(title: "Sign out", style: .plain, target: self, action: #selector(signOut))
-//        navigationItem.rightBarButtonItem  = signOutButton
     }
     
-    @objc func signOut() {
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            return
-        }
-    }
+//    @objc func signOut() {
+//        do {
+//            try Auth.auth().signOut()
+//        } catch {
+//            return
+//        }
+//    }
     
 }

@@ -93,6 +93,9 @@ class LoginVC: UIViewController {
             if let error = error {
                 print(error.localizedDescription)
                 return
+            } else {
+                let viewController = TapeTableVC()
+                self.navigationController?.pushViewController(viewController, animated: true)
             }
         }
     }
@@ -108,7 +111,6 @@ class LoginVC: UIViewController {
         else { return }
         
         signIn(email: email, password: password)
-        self.dismiss(animated: true, completion: nil)
     }
     
 }
