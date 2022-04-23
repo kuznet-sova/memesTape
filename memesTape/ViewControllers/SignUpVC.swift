@@ -6,7 +6,9 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseAuth
+import FirebaseDatabase
+import FirebaseStorage
 
 class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -56,6 +58,7 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(signIn), for: .touchUpInside)
         return button
     }()
     
@@ -64,14 +67,13 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         let attributedTittle = NSMutableAttributedString(string: "Already have an account? ", attributes: [.font: UIFont.systemFont(ofSize: 14), .foregroundColor: UIColor.lightGray])
         attributedTittle.append(NSAttributedString(string: "Login", attributes: [.font: UIFont.boldSystemFont(ofSize: 14), .foregroundColor: UIColor.systemBlue]))
         button.setAttributedTitle(attributedTittle, for: .normal)
-        button.addTarget(self, action: #selector(handleShowSignIn), for: .touchUpInside)
+        button.addTarget(self, action: #selector(showSignIn), for: .touchUpInside)
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
         setupUI()
     }
     
@@ -94,7 +96,25 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         stackView.anchor(top: logoContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 50, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 190)
     }
     
-    @objc private func handleShowSignIn() {
+    private func createUser(email: String, password: String, _ callback: ((Error?) -> ())? = nil) {
+          Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+              if let error = error {
+                  callback?(error)
+                  return
+              }
+          }
+    }
+    
+    @objc fileprivate func signIn() {
+        guard let email = emailTextField.text, email.count > 0,
+              let username = usernameTextField.text, username.count > 0,
+              let password = passwordTextField.text, password.count > 0
+        else { return }
+        
+        createUser(email: email, password: password)
+    }
+    
+    @objc private func showSignIn() {
         _ = navigationController?.popViewController(animated: true)
     }
     

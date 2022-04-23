@@ -6,7 +6,9 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseAuth
+import FirebaseDatabase
+import FirebaseStorage
 
 class LoginVC: UIViewController {
     
@@ -47,6 +49,7 @@ class LoginVC: UIViewController {
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(login), for: .touchUpInside)
         return button
     }()
     
@@ -55,7 +58,7 @@ class LoginVC: UIViewController {
         let attributedTittle = NSMutableAttributedString(string: "New to Memta? ", attributes: [.font: UIFont.systemFont(ofSize: 14), .foregroundColor: UIColor.lightGray])
         attributedTittle.append(NSAttributedString(string: "Sign up", attributes: [.font: UIFont.boldSystemFont(ofSize: 14), .foregroundColor: UIColor.systemBlue]))
         button.setAttributedTitle(attributedTittle, for: .normal)
-        button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
+        button.addTarget(self, action: #selector(showSignUp), for: .touchUpInside)
         return button
     }()
     
@@ -63,7 +66,6 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
         view.backgroundColor = .white
-        
         setupUI()
     }
     
@@ -86,9 +88,27 @@ class LoginVC: UIViewController {
         stackView.anchor(top: logoContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 50, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 140)
     }
     
-    @objc private func handleShowSignUp() {
+    private func signIn(email: String, password: String, _ callback: ((Error?) -> ())? = nil) {
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+        }
+    }
+    
+    @objc private func showSignUp() {
         let signUpController = SignUpVC()
         navigationController?.pushViewController(signUpController, animated: true)
+    }
+    
+    @objc func login() {
+        guard let email = emailTextField.text,
+              let password = passwordTextField.text
+        else { return }
+        
+        signIn(email: email, password: password)
+        self.dismiss(animated: true, completion: nil)
     }
     
 }

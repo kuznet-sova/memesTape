@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Firebase
+//import Firebase
 
 extension UIView {
     func anchor(top: NSLayoutYAxisAnchor?,
@@ -41,17 +41,29 @@ extension UIView {
     }
 }
 
-extension Auth {
-    func createUser(withEmail email: String, username: String, password: String, completion: @escaping (Error?) -> ()) {
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-            // ...
-        }
-    }
-    
-    func signIn(withEmail email: String, password: String, completion: @escaping (Error?) -> ()) {
-        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-          // ...
-        }
-    }
-    
-}
+//extension Auth {
+////    func createUser(withEmail email: String, username: String, password: String, completion: @escaping (Error?) -> ()) {
+////        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+////            if let error = error {
+////                completion(error)
+////                return
+////            }
+////        }
+////    }
+//    func createUser(email: String, username: String, password: String, _ callback: ((Error?) -> ())? = nil){
+//          Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+//              if let e = error{
+//                  callback?(e)
+//                  return
+//              }
+//              callback?(nil)
+//          }
+//    }
+//    
+//    func signIn(withEmail email: String, password: String, completion: @escaping (Error?) -> ()) {
+//        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+//          // ...
+//        }
+//    }
+//    
+//}

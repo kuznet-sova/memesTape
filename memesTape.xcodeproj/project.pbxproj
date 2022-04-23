@@ -20,6 +20,8 @@
 		8C3797DA28105900002E5898 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3797D928105900002E5898 /* LoginVC.swift */; };
 		8C3797DC28105E34002E5898 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3797DB28105E34002E5898 /* SignUpVC.swift */; };
 		8C3797DE28106AA6002E5898 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3797DD28106AA6002E5898 /* MainVC.swift */; };
+		8C3797E328135FCD002E5898 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 8C3797E228135FCD002E5898 /* FirebaseDatabase */; };
+		8C3797E528135FDF002E5898 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 8C3797E428135FDF002E5898 /* FirebaseStorage */; };
 		8C4E185627F4908900F557E1 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E185827F4908900F557E1 /* Localizable.stringsdict */; };
 		8C660A3327F793250027B338 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C660A3227F793250027B338 /* SpinnerViewController.swift */; };
 		8CABD48C27F9DDC300A974F8 /* MessagesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CABD48B27F9DDC300A974F8 /* MessagesViewCell.swift */; };
@@ -64,6 +66,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C3797E328135FCD002E5898 /* FirebaseDatabase in Frameworks */,
+				8C3797E528135FDF002E5898 /* FirebaseStorage in Frameworks */,
 				8C3797CF280472B9002E5898 /* FirebaseAnalytics in Frameworks */,
 				8C3797D1280472B9002E5898 /* FirebaseAuth in Frameworks */,
 			);
@@ -77,6 +81,7 @@
 			children = (
 				8C0C6F4227E507090042AA4A /* memesTape */,
 				8C0C6F4127E507090042AA4A /* Products */,
+				8C3797E128135FCD002E5898 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -112,6 +117,13 @@
 				8C09B92E27FB4A050014ED96 /* CommentInputTextView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		8C3797E128135FCD002E5898 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		8CDA4C3027E7458E009489D0 /* ViewControllers */ = {
@@ -184,6 +196,8 @@
 			packageProductDependencies = (
 				8C3797CE280472B9002E5898 /* FirebaseAnalytics */,
 				8C3797D0280472B9002E5898 /* FirebaseAuth */,
+				8C3797E228135FCD002E5898 /* FirebaseDatabase */,
+				8C3797E428135FDF002E5898 /* FirebaseStorage */,
 			);
 			productName = memesTape;
 			productReference = 8C0C6F4027E507090042AA4A /* memesTape.app */;
@@ -511,6 +525,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8C3797CD280472B9002E5898 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		8C3797E228135FCD002E5898 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C3797CD280472B9002E5898 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		8C3797E428135FDF002E5898 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C3797CD280472B9002E5898 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
