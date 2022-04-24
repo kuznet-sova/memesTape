@@ -26,12 +26,10 @@ class MainVC: UITabBarController, UITabBarControllerDelegate {
         }
     }
     
-    @objc func signOut() {
+    @objc private func signOut() {
         do {
             try Auth.auth().signOut()
-        } catch {
-            return
-        }
+        } catch { return }
     }
     
 }

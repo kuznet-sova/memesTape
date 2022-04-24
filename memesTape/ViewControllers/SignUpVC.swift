@@ -102,8 +102,7 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                 callback?(error)
                 return
             } else {
-                let viewController = TapeTableVC()
-                self.navigationController?.pushViewController(viewController, animated: true)
+                self.view.window?.rootViewController = UINavigationController.init(rootViewController: TapeTableVC())
             }
         }
     }

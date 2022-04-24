@@ -11,11 +11,10 @@ import FirebaseDatabase
 import FirebaseStorage
 
 class TapeTableVC: UITableViewController {
-    private var memes: [Meme] = []
     var messagesHistory: [Int : [Message]] = [:]
     var likesHistory: [Int : Int] = [:]
     var likeTapHistory: [Int : Bool] = [:]
-//    let signOutButton = UIBarButtonItem(title: "Sign out", style: .plain, target: self, action: #selector(signOut))
+    private var memes: [Meme] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +30,8 @@ class TapeTableVC: UITableViewController {
         
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl?.addTarget(self, action: #selector(callPullToRefresh), for: .valueChanged)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign out", style: .plain, target: self, action: #selector(signOut))
         
-//        self.navigationItem.rightBarButtonItem  = signOutButton
     }
     
     private func setupTableView() {
@@ -118,13 +117,19 @@ class TapeTableVC: UITableViewController {
         }
     }
     
-//    @objc func signOut() {
-//        do {
-//            try Auth.auth().signOut()
-//        } catch {
-//            return
-//        }
-//    }
+    @objc func signOut() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Sign out", style: .destructive, handler: { (_) in
+            do {
+                try Auth.auth().signOut()
+                self.view.window?.rootViewController = UINavigationController.init(rootViewController: LoginVC())
+            } catch { return }
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
     
 }
 
