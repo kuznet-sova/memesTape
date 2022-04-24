@@ -65,7 +65,6 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
-        view.backgroundColor = .white
         setupUI()
     }
     
@@ -100,8 +99,7 @@ class LoginVC: UIViewController {
     }
     
     @objc private func showSignUp() {
-        let signUpController = SignUpVC()
-        navigationController?.pushViewController(signUpController, animated: true)
+        navigationController?.pushViewController(SignUpVC(), animated: true)
     }
     
     @objc func login() {
