@@ -64,7 +64,6 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.modalPresentationStyle = .fullScreen
         navigationController?.isNavigationBarHidden = true
         view.backgroundColor = .white
         setupUI()

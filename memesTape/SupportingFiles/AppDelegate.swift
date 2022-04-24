@@ -21,7 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setupWindow() {
         FirebaseApp.configure()
         window = UIWindow(frame: UIScreen.main.bounds)
-//        window?.rootViewController = UINavigationController.init(rootViewController: TapeTableVC())
         window?.rootViewController = UINavigationController.init(rootViewController: MainVC())
         window?.makeKeyAndVisible()
     }

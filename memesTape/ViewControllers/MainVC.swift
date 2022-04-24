@@ -14,15 +14,13 @@ class MainVC: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.modalPresentationStyle = .fullScreen
+        view.backgroundColor = .white
         delegate = self
         
         signOut()
         if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
-                let loginVC = LoginVC()
-                let navController = UINavigationController(rootViewController: loginVC)
-                self.present(navController, animated: true, completion: nil)
+                self.navigationController?.pushViewController(LoginVC(), animated: true)
             }
             return
         }
