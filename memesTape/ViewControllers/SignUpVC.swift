@@ -97,12 +97,15 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     }
     
     private func createUser(email: String, password: String, _ callback: ((Error?) -> ())? = nil) {
-          Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-              if let error = error {
-                  callback?(error)
-                  return
-              }
-          }
+        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+            if let error = error {
+                callback?(error)
+                return
+            } else {
+                let viewController = TapeTableVC()
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
+        }
     }
     
     @objc fileprivate func signIn() {

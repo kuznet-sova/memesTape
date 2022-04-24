@@ -14,9 +14,10 @@ class MainVC: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.modalPresentationStyle = .fullScreen
         delegate = self
         
-//        signOut()
+        signOut()
         if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
                 let loginVC = LoginVC()
@@ -27,12 +28,12 @@ class MainVC: UITabBarController, UITabBarControllerDelegate {
         }
     }
     
-//    @objc func signOut() {
-//        do {
-//            try Auth.auth().signOut()
-//        } catch {
-//            return
-//        }
-//    }
+    @objc func signOut() {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            return
+        }
+    }
     
 }

@@ -64,6 +64,7 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.modalPresentationStyle = .fullScreen
         navigationController?.isNavigationBarHidden = true
         view.backgroundColor = .white
         setupUI()
@@ -91,7 +92,7 @@ class LoginVC: UIViewController {
     private func signIn(email: String, password: String, _ callback: ((Error?) -> ())? = nil) {
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if let error = error {
-                print(error.localizedDescription)
+                callback?(error)
                 return
             } else {
                 let viewController = TapeTableVC()
